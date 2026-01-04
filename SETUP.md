@@ -53,34 +53,41 @@ git commit -m "Add encrypted secrets"
 git push
 ```
 
-### Step 3: On a New Machine
+### Step 3: On a New Machine (Recommended Setup)
 
 ```bash
-# Clone the repo
+# 1. Clone the repo
 git clone https://github.com/suneetn/Agents_and_Skills.git
 cd Agents_and_Skills
 
-# Option A: Load into current session only (no file created)
-source ./scripts/decrypt-secrets.sh
+# 2. Install age (if not already installed)
+# Mac: brew install age
+# Linux: sudo apt install age
+# Windows: scoop install age
 
-# Option B: Create persistent .env file
+# 3. Decrypt and create persistent .env file
 ./scripts/decrypt-secrets.sh --persist
-```
+# Enter passphrase when prompted
 
-### Step 4: Auto-load on Shell Startup
-
-**If you used `--persist` (creates .env file):**
-
-Add to `~/.zshrc` or `~/.bashrc`:
-```bash
-# Auto-load API keys from .env
+# 4. Add auto-load to shell profile
+echo '
+# Load API keys from Agents_and_Skills (cross-platform)
 set -a; source ~/Agents_and_Skills/.env 2>/dev/null; set +a
+' >> ~/.zshrc   # or ~/.bashrc for bash
+
+# 5. Reload shell
+source ~/.zshrc
+
+# 6. Verify
+echo $FMP_API_KEY | head -c 8
 ```
 
-**If you prefer on-demand loading:**
+### Step 4: Alternative - On-Demand Loading
 
-Add an alias:
+If you prefer not to auto-load keys (more secure):
+
 ```bash
+# Add alias to ~/.zshrc or ~/.bashrc
 alias load-secrets='cd ~/Agents_and_Skills && source ./scripts/decrypt-secrets.sh && cd -'
 ```
 
