@@ -157,3 +157,4 @@ def extract_management_guidance(transcript_content: str) -> Dict:
 - [FMP API Documentation - Latest Transcripts](https://site.financialmodelingprep.com/developer/docs#latest-transcripts)
 - [FMP Pricing](https://site.financialmodelingprep.com/pricing) - Check premium tier features
 
+

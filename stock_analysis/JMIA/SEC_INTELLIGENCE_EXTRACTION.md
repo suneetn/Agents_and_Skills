@@ -119,3 +119,4 @@
 
 **Our current approach is correct - we're using SEC intelligence in our final results!**
 
+

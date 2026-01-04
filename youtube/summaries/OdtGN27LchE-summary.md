@@ -45,3 +45,4 @@ To get the full transcript:
 2. Run: `yt-dlp --write-auto-subs --sub-lang en --skip-download --convert-subs txt "https://www.youtube.com/watch?v=OdtGN27LchE" -o "%(title)s_transcript.txt"`
 
 
+

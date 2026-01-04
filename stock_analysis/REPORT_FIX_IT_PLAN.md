@@ -569,3 +569,4 @@ This plan addresses 10 critical issues identified in the report critique, organi
 - May need to add AI integration for investment thesis generation (or use rule-based fallback)
 
 
+

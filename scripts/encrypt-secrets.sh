@@ -35,3 +35,4 @@ echo "  1. Delete the plaintext: rm $SECRETS_FILE"
 echo "  2. Commit encrypted file: git add $ENCRYPTED_FILE && git commit -m 'Add encrypted secrets'"
 echo "  3. Push: git push"
 
+

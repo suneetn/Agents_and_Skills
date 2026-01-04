@@ -264,3 +264,4 @@ cursor-agent -p --output-format text "Your prompt"
 cursor-agent -p --output-format json "Your prompt"
 ```
 
+

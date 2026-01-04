@@ -78,3 +78,4 @@
 - Test news headlines with a stock that has recent news
 - Proceed to Cycle 2: Analyze AAPL, critique, plan improvements, implement fixes
 
+

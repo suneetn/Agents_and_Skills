@@ -115,3 +115,4 @@ JMIA: ❌ EMPTY
 - Test Date: 2025-12-30
 - API Key Tier: Free tier (based on empty responses)
 
+

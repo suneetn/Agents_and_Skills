@@ -152,3 +152,4 @@ The JMIA analysis now includes:
 
 Full report: `/Users/snandwani2/personal/stock_analysis/JMIA/2025-12-30_11-46-41_comprehensive_analysis.md`
 
+
