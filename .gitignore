@@ -124,3 +124,7 @@ _bmad-output/
 .fmp_config.sh
 secrets.json
 credentials.json
+
+# Plaintext secrets (NEVER commit!)
+.secrets.txt
+

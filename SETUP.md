@@ -1,6 +1,6 @@
 # Setup Guide
 
-This guide helps you set up API keys on a new Mac.
+This guide helps you set up API keys on any platform (Mac, Linux, Windows).
 
 ## Required API Keys
 
@@ -10,55 +10,100 @@ This guide helps you set up API keys on a new Mac.
 | `MAILGUN_API_KEY` | Email sending | https://www.mailgun.com/ |
 | `MAILGUN_DOMAIN` | Email domain (default: `mail.quanthub.ai`) | Your Mailgun account |
 
-## Setup (iCloud Sync Method)
+---
 
-If you're using iCloud across multiple Macs, keys sync automatically:
+## Cross-Platform Setup (Recommended)
 
-### 1. Create the secrets folder (first time only)
+Uses `age` encryption - works on Mac, Linux, and Windows.
+
+### Step 1: Install age
+
 ```bash
-mkdir -p ~/Library/Mobile\ Documents/com~apple~CloudDocs/secrets
+# Mac
+brew install age
+
+# Linux (Debian/Ubuntu)
+sudo apt install age
+
+# Windows (using scoop)
+scoop install age
+
+# Or download from: https://github.com/FiloSottile/age/releases
 ```
 
-### 2. Create api-keys.sh
+### Step 2: First Time Setup (Creating Encrypted Secrets)
+
 ```bash
+# Clone the repo
+git clone https://github.com/suneetn/Agents_and_Skills.git
+cd Agents_and_Skills
+
+# Create and edit secrets file
+./scripts/encrypt-secrets.sh
+# Edit .secrets.txt with your actual keys
+nano .secrets.txt
+
+# Encrypt (choose a strong password!)
+./scripts/encrypt-secrets.sh
+
+# Clean up and commit
+rm .secrets.txt
+git add secrets.age
+git commit -m "Add encrypted secrets"
+git push
+```
+
+### Step 3: On a New Machine
+
+```bash
+# Clone the repo
+git clone https://github.com/suneetn/Agents_and_Skills.git
+cd Agents_and_Skills
+
+# Decrypt and load secrets (enter your password)
+source ./scripts/decrypt-secrets.sh
+
+# Verify
+echo $FMP_API_KEY | head -c 8
+```
+
+### Step 4: Auto-load on Shell Startup (Optional)
+
+Add to your shell profile (`~/.zshrc`, `~/.bashrc`, or PowerShell profile):
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+alias load-secrets='cd ~/Agents_and_Skills && source ./scripts/decrypt-secrets.sh && cd -'
+```
+
+Then run `load-secrets` when you need the keys.
+
+---
+
+## Alternative: iCloud Sync (Mac Only)
+
+If you only use Macs with the same iCloud account:
+
+```bash
+# Create secrets folder in iCloud
+mkdir -p ~/Library/Mobile\ Documents/com~apple~CloudDocs/secrets
+
+# Create api-keys.sh
 cat > ~/Library/Mobile\ Documents/com~apple~CloudDocs/secrets/api-keys.sh << 'EOF'
-# API Keys - Synced via iCloud
-export FMP_API_KEY="your_fmp_key_here"
-export MAILGUN_API_KEY="your_mailgun_key_here"
+export FMP_API_KEY="your_key_here"
+export MAILGUN_API_KEY="your_key_here"
 export MAILGUN_DOMAIN="mail.quanthub.ai"
 EOF
-```
 
-### 3. Add to ~/.zshrc
-```bash
+# Add to ~/.zshrc
 echo 'source ~/Library/Mobile\ Documents/com~apple~CloudDocs/secrets/api-keys.sh 2>/dev/null' >> ~/.zshrc
-source ~/.zshrc
 ```
 
-### 4. Verify
-```bash
-echo $FMP_API_KEY | head -c 8  # Should show first 8 chars
-```
-
-## Alternative: Local .env File
-
-If you prefer a local `.env` file instead of iCloud:
-
-```bash
-# Create .env in project root (already in .gitignore)
-cat > .env << 'EOF'
-FMP_API_KEY=your_fmp_key_here
-MAILGUN_API_KEY=your_mailgun_key_here
-MAILGUN_DOMAIN=mail.quanthub.ai
-EOF
-
-# Add to ~/.zshrc to auto-load
-echo 'set -a; source ~/personal/.env 2>/dev/null; set +a' >> ~/.zshrc
-```
+---
 
 ## Skills Location
 
-Skills are stored in `~/.claude/skills/` (not in this repo). They read API keys from environment variables automatically.
+Skills are stored in `~/.claude/skills/` (not in this repo). They read API keys from environment variables automatically using `os.environ.get()`.
 
 ## Verify Everything Works
 
@@ -66,7 +111,29 @@ Skills are stored in `~/.claude/skills/` (not in this repo). They read API keys 
 # Test stock screener
 python3 ~/.claude/skills/stock-screener/scripts/stock_screener.py momentum --limit 3
 
-# Test stock analyst
+# Test stock analyst  
 python3 ~/.claude/skills/stock-analyst/scripts/stock_analysis_fmp.py AAPL
 ```
 
+---
+
+## Updating Secrets
+
+If you need to update your keys:
+
+```bash
+# Decrypt to plaintext
+age -d secrets.age > .secrets.txt
+
+# Edit
+nano .secrets.txt
+
+# Re-encrypt (use same password!)
+age -p .secrets.txt > secrets.age
+
+# Clean up and commit
+rm .secrets.txt
+git add secrets.age
+git commit -m "Update secrets"
+git push
+```
