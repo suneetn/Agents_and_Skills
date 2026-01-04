@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #F4F6F6;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: #1C2833;
+  padding: 20pt 40pt;
+}
+.header h1 {
+  color: #FFFFFF;
+  font-size: 28pt;
+  margin: 0;
+}
+.content {
+  display: flex;
+  flex: 1;
+  padding: 20pt 40pt;
+  gap: 25pt;
+}
+.left-col {
+  flex: 1.2;
+}
+.right-col {
+  flex: 0.8;
+}
+.table-container {
+  background: #FFFFFF;
+  border-radius: 8pt;
+  padding: 15pt;
+  margin-bottom: 15pt;
+}
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8pt 0;
+  border-bottom: 1pt solid #E8E8E8;
+}
+.table-row:last-child {
+  border-bottom: none;
+}
+.table-row h4 {
+  color: #2E4053;
+  font-size: 12pt;
+  margin: 0;
+}
+.table-row p {
+  color: #1C2833;
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 0;
+}
+.premium {
+  color: #E74C3C;
+}
+.insight-box {
+  background: #1C2833;
+  border-radius: 8pt;
+  padding: 15pt;
+}
+.insight-box h3 {
+  color: #E74C3C;
+  font-size: 14pt;
+  margin: 0 0 10pt 0;
+}
+.insight-box p {
+  color: #FFFFFF;
+  font-size: 11pt;
+  line-height: 1.5;
+  margin: 0;
+}
+.peg-highlight {
+  background: #27AE60;
+  border-radius: 8pt;
+  padding: 15pt;
+  text-align: center;
+  margin-bottom: 15pt;
+}
+.peg-highlight h4 {
+  color: #FFFFFF;
+  font-size: 12pt;
+  margin: 0 0 5pt 0;
+  text-transform: uppercase;
+}
+.peg-highlight p {
+  color: #FFFFFF;
+  font-size: 32pt;
+  font-weight: bold;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Valuation Analysis</h1>
+</div>
+<div class="content">
+  <div class="left-col">
+    <div class="table-container">
+      <div class="table-row">
+        <h4>P/E Ratio</h4>
+        <p class="premium">177x</p>
+      </div>
+      <div class="table-row">
+        <h4>P/S Ratio</h4>
+        <p class="premium">21.6x</p>
+      </div>
+      <div class="table-row">
+        <h4>P/B Ratio</h4>
+        <p class="premium">19.3x</p>
+      </div>
+      <div class="table-row">
+        <h4>EV/EBITDA</h4>
+        <p class="premium">105x</p>
+      </div>
+      <div class="table-row">
+        <h4>52-Week High</h4>
+        <p>$885.92</p>
+      </div>
+      <div class="table-row">
+        <h4>52-Week Low</h4>
+        <p>$469.24</p>
+      </div>
+    </div>
+  </div>
+  <div class="right-col">
+    <div class="peg-highlight">
+      <h4>PEG Ratio</h4>
+      <p>1.07</p>
+    </div>
+    <div class="insight-box">
+      <h3>Valuation Insight</h3>
+      <p>Premium valuation justified by monopolistic positions, 30%+ growth, and recession-resistant government customers. PEG of 1.07 suggests growth is priced fairly.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

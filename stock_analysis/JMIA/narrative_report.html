@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumia Technologies AG (JMIA) - Stock Analysis Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            color: #2C3E50;
+            background: #ECF0F1;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .symbol {
+            font-size: 24px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .header .price {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        .header .recommendation {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 30px;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: #F39C12;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 60px 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section h2 {
+            font-size: 36px;
+            color: #E74C3C;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #F39C12;
+        }
+        
+        .section h3 {
+            font-size: 24px;
+            color: #C0392B;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .narrative-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #2C3E50;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        
+        .narrative-text:first-child {
+            font-size: 20px;
+            font-weight: 500;
+            color: #E74C3C;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .metric-card {
+            background: #ECF0F1;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #E74C3C;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .metric-card h4 {
+            color: #C0392B;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .metric-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #E74C3C;
+        }
+        
+        .metric-card .label {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        /* Highlights */
+        .highlight-box {
+            background: linear-gradient(135deg, #F39C1215 0%, #E74C3C15 100%);
+            border-left: 4px solid #F39C12;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        
+        .highlight-box h4 {
+            color: #C0392B;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2C3E50;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .section {
+                padding: 40px 20px;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Jumia Technologies AG</h1>
+            <div class="symbol">JMIA</div>
+            <div class="price">$11.62</div>
+            <div class="recommendation">SELL - Medium-Low Confidence</div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="nav">
+            <a href="#story">The Story</a>
+            <a href="#fundamentals">Fundamentals</a>
+            <a href="#technicals">Technicals</a>
+            <a href="#catalysts">Catalysts</a>
+            <a href="#risks">Risks</a>
+            <a href="#conclusion">Conclusion</a>
+        </div>
+        
+        <!-- The Story Section -->
+        <div id="story" class="section">
+            <h2>The Story</h2>
+            <div class="narrative-text">Jumia Technologies AG (JMIA) stands at a critical inflection point. Trading at $11.62, this is a turnaround story in the making—one that requires careful analysis to separate genuine recovery signals from false hope.</div>
+            <div class="narrative-text">Jumia Technologies AG operates in the Specialty Retail sector within the broader Consumer Cyclical industry. As a small-cap company with a market capitalization of $0.71B, Jumia Technologies AG plays a significant role in its market.</div>
+        </div>
+        
+        <!-- Fundamentals Section -->
+        <div id="fundamentals" class="section">
+            <h2>Fundamental Analysis</h2>
+            <div class="narrative-text">The financial picture reveals a company in transition. Revenue growth of 25.9% shows promise, but profitability remains elusive with a -31.0% return on equity. The trajectory momentum is improving, suggesting this is a turnaround story in progress—one that requires continued execution to validate.</div>
+            
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h4>Return on Equity</h4>
+                <div class="value">-31.0%</div>
+                <div class="label">Profitability Metric</div>
+            </div>
+            <div class="metric-card">
+                <h4>Revenue Growth</h4>
+                <div class="value">25.9%</div>
+                <div class="label">Year-over-Year</div>
+            </div>
+            <div class="metric-card">
+                <h4>P/E Ratio</h4>
+                <div class="value">-17.34</div>
+                <div class="label">Valuation Metric</div>
+            </div>
+            <div class="metric-card">
+                <h4>Net Income Growth</h4>
+                <div class="value">0.7%</div>
+                <div class="label">Year-over-Year</div>
+            </div>
+        </div>
+        
+        </div>
+        
+        <!-- Technicals Section -->
+        <div id="technicals" class="section">
+            <h2>Technical Analysis</h2>
+            <div class="narrative-text">From a technical perspective, the stock is in a strong uptrend, with price action showing consistent momentum. With RSI at 45.0, the stock is in neutral territory, providing flexibility for movement in either direction.</div>
+            
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h4>RSI</h4>
+                <div class="value">45.0</div>
+                <div class="label">Momentum Indicator</div>
+            </div>
+            <div class="metric-card">
+                <h4>Trend</h4>
+                <div class="value">Uptrend</div>
+                <div class="label">Primary Direction</div>
+            </div>
+        </div>
+        
+        </div>
+        
+        <!-- Catalysts Section -->
+        <div id="catalysts" class="section">
+            <h2>Key Catalysts</h2>
+            <div class="narrative-text">Key catalysts could drive the stock's performance: management's target for profitability by 2026, strategic initiatives including upcountry strategy showing sustained traction, sustained revenue growth momentum. Investors should monitor these developments closely as they could significantly impact the investment thesis.</div>
+        </div>
+        
+        <!-- Risks Section -->
+        <div id="risks" class="section">
+            <h2>Risk Factors</h2>
+            <div class="narrative-text">Investors should be aware of several risk factors: weak fundamental metrics indicating operational challenges, negative profitability raising concerns about sustainability. These risks could impact the stock's performance and should be carefully considered before making an investment decision.</div>
+        </div>
+        
+        <!-- Investment Story Section -->
+        <div id="conclusion" class="section">
+            <h2>Investment Thesis</h2>
+            <div class="narrative-text">Given the comprehensive analysis, the investment recommendation is SELL with medium-low confidence. This is a turnaround play, requiring patience and careful monitoring of execution. The improving trajectory suggests potential, but success is not guaranteed.</div>
+            <div class="highlight-box">
+                <h4>Conclusion</h4>
+                <div class="narrative-text">For JMIA, the analysis points to a SELL recommendation. This is a story of transformation—one that requires careful monitoring but could deliver significant returns if execution improves. The key is timing: enter too early and you face continued losses; enter too late and you miss the recovery. As always, conduct your own research and consider your risk tolerance before investing.</div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Jumia Technologies AG (JMIA) Stock Analysis Report</strong></p>
+            <p>Generated on December 30, 2025 at 12:29 PM</p>
+            <p>This report is for informational purposes only and does not constitute investment advice.</p>
+        </div>
+    </div>
+</body>
+</html>

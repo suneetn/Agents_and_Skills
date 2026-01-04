@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #1C2833;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  padding: 25pt 40pt 15pt;
+}
+.header h1 {
+  color: #FFFFFF;
+  font-size: 28pt;
+  margin: 0;
+}
+.content {
+  display: flex;
+  flex: 1;
+  padding: 0 40pt 25pt;
+  gap: 25pt;
+}
+.left-col {
+  flex: 1;
+}
+.right-col {
+  flex: 1;
+}
+.buy-box {
+  background: #27AE60;
+  border-radius: 10pt;
+  padding: 20pt;
+  text-align: center;
+  margin-bottom: 15pt;
+}
+.buy-box h2 {
+  color: #FFFFFF;
+  font-size: 36pt;
+  margin: 0 0 5pt 0;
+}
+.buy-box p {
+  color: #FFFFFF;
+  font-size: 14pt;
+  margin: 0;
+}
+.trade-setup {
+  background: #2E4053;
+  border-radius: 8pt;
+  padding: 15pt;
+}
+.trade-setup h3 {
+  color: #E74C3C;
+  font-size: 14pt;
+  margin: 0 0 12pt 0;
+}
+.trade-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8pt;
+}
+.trade-row h4 {
+  color: #AAB7B8;
+  font-size: 11pt;
+  margin: 0;
+}
+.trade-row p {
+  color: #FFFFFF;
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 0;
+}
+.target-box {
+  background: #2E4053;
+  border-radius: 8pt;
+  padding: 15pt;
+}
+.target-box h3 {
+  color: #E74C3C;
+  font-size: 14pt;
+  margin: 0 0 12pt 0;
+}
+.target-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8pt 0;
+  border-bottom: 1pt solid #3E5063;
+}
+.target-item:last-child {
+  border-bottom: none;
+}
+.target-item h4 {
+  color: #AAB7B8;
+  font-size: 11pt;
+  margin: 0;
+}
+.target-item p {
+  color: #27AE60;
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 0;
+}
+.risk-reward {
+  background: #E74C3C;
+  border-radius: 8pt;
+  padding: 12pt;
+  text-align: center;
+  margin-top: 15pt;
+}
+.risk-reward h4 {
+  color: #FFFFFF;
+  font-size: 11pt;
+  margin: 0 0 3pt 0;
+}
+.risk-reward p {
+  color: #FFFFFF;
+  font-size: 20pt;
+  font-weight: bold;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Investment Recommendation</h1>
+</div>
+<div class="content">
+  <div class="left-col">
+    <div class="buy-box">
+      <h2>BUY</h2>
+      <p>On weakness to $510-540 zone</p>
+    </div>
+    <div class="trade-setup">
+      <h3>Trade Setup</h3>
+      <div class="trade-row">
+        <h4>Entry Zone</h4>
+        <p>$510-540</p>
+      </div>
+      <div class="trade-row">
+        <h4>Stop Loss</h4>
+        <p>$485 (-10%)</p>
+      </div>
+      <div class="trade-row">
+        <h4>Position Size</h4>
+        <p>3-5% of Portfolio</p>
+      </div>
+    </div>
+  </div>
+  <div class="right-col">
+    <div class="target-box">
+      <h3>Price Targets</h3>
+      <div class="target-item">
+        <h4>Target 1</h4>
+        <p>$650 (+20%)</p>
+      </div>
+      <div class="target-item">
+        <h4>Target 2</h4>
+        <p>$750 (+40%)</p>
+      </div>
+      <div class="target-item">
+        <h4>Target 3</h4>
+        <p>$850 (+60%)</p>
+      </div>
+      <div class="target-item">
+        <h4>Analyst Avg</h4>
+        <p>$814 (+44%)</p>
+      </div>
+    </div>
+    <div class="risk-reward">
+      <h4>Risk/Reward at Target 2</h4>
+      <p>4:1</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #F4F6F6;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: #1C2833;
+  padding: 20pt 40pt;
+}
+.header h1 {
+  color: #FFFFFF;
+  font-size: 28pt;
+  margin: 0;
+}
+.content {
+  display: flex;
+  flex: 1;
+  padding: 20pt 40pt;
+  gap: 25pt;
+}
+.col {
+  flex: 1;
+}
+.section-title {
+  color: #1C2833;
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 0 0 10pt 0;
+  padding-bottom: 5pt;
+}
+.indicator-box {
+  background: #FFFFFF;
+  border-radius: 8pt;
+  padding: 12pt;
+  margin-bottom: 10pt;
+}
+.indicator-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6pt;
+}
+.indicator-row:last-child {
+  margin-bottom: 0;
+}
+.indicator-row h4 {
+  color: #2E4053;
+  font-size: 11pt;
+  margin: 0;
+}
+.indicator-row p {
+  font-size: 11pt;
+  font-weight: bold;
+  margin: 0;
+}
+.bearish { color: #E74C3C; }
+.bullish { color: #27AE60; }
+.neutral { color: #F39C12; }
+.signal-box {
+  background: #F39C12;
+  border-radius: 8pt;
+  padding: 15pt;
+  text-align: center;
+}
+.signal-box h4 {
+  color: #FFFFFF;
+  font-size: 12pt;
+  margin: 0 0 5pt 0;
+  text-transform: uppercase;
+}
+.signal-box p {
+  color: #FFFFFF;
+  font-size: 24pt;
+  font-weight: bold;
+  margin: 0;
+}
+.levels-box {
+  background: #FFFFFF;
+  border-radius: 8pt;
+  padding: 12pt;
+}
+.level-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5pt 0;
+  border-bottom: 1pt solid #E8E8E8;
+}
+.level-item:last-child {
+  border-bottom: none;
+}
+.level-item h4 {
+  color: #2E4053;
+  font-size: 10pt;
+  margin: 0;
+}
+.level-item p {
+  color: #1C2833;
+  font-size: 11pt;
+  font-weight: bold;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Technical Analysis</h1>
+</div>
+<div class="content">
+  <div class="col">
+    <p class="section-title">Moving Averages</p>
+    <div class="indicator-box">
+      <div class="indicator-row">
+        <h4>SMA 20</h4>
+        <p class="bearish">$568.98 (Below)</p>
+      </div>
+      <div class="indicator-row">
+        <h4>SMA 50</h4>
+        <p class="bearish">$595.12 (Below)</p>
+      </div>
+      <div class="indicator-row">
+        <h4>SMA 200</h4>
+        <p class="bearish">$680.17 (Below)</p>
+      </div>
+    </div>
+    <p class="section-title">Momentum</p>
+    <div class="indicator-box">
+      <div class="indicator-row">
+        <h4>RSI (14)</h4>
+        <p class="neutral">42.95 (Neutral)</p>
+      </div>
+      <div class="indicator-row">
+        <h4>MACD</h4>
+        <p class="bullish">Bullish Crossover</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <p class="section-title">Support/Resistance</p>
+    <div class="levels-box">
+      <div class="level-item">
+        <h4>Resistance 3</h4>
+        <p>$680 (200 SMA)</p>
+      </div>
+      <div class="level-item">
+        <h4>Resistance 2</h4>
+        <p>$595 (50 SMA)</p>
+      </div>
+      <div class="level-item">
+        <h4>Resistance 1</h4>
+        <p>$577</p>
+      </div>
+      <div class="level-item">
+        <h4>Current</h4>
+        <p>$563.45</p>
+      </div>
+      <div class="level-item">
+        <h4>Support 1</h4>
+        <p>$519</p>
+      </div>
+      <div class="level-item">
+        <h4>Support 2</h4>
+        <p>$497</p>
+      </div>
+    </div>
+    <div class="signal-box">
+      <h4>Overall Signal</h4>
+      <p>HOLD</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

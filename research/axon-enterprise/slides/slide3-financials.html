@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #ffffff; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #F4F6F6;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  background: #1C2833;
+  padding: 18pt 40pt;
+}
+.header h1 {
+  color: #FFFFFF;
+  font-size: 26pt;
+  margin: 0;
+}
+.content {
+  display: flex;
+  flex: 1;
+  padding: 15pt 40pt 40pt;
+  gap: 25pt;
+}
+.col {
+  flex: 1;
+}
+.metric-card {
+  background: #FFFFFF;
+  border-radius: 8pt;
+  padding: 10pt 12pt;
+  margin-bottom: 10pt;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.metric-card h4 {
+  color: #2E4053;
+  font-size: 11pt;
+  margin: 0;
+}
+.metric-card p {
+  color: #1C2833;
+  font-size: 16pt;
+  font-weight: bold;
+  margin: 0;
+}
+.highlight-card {
+  background: #E74C3C;
+  border-radius: 8pt;
+  padding: 12pt;
+  margin-bottom: 10pt;
+}
+.highlight-card h4 {
+  color: #FFFFFF;
+  font-size: 10pt;
+  margin: 0 0 4pt 0;
+  text-transform: uppercase;
+}
+.highlight-card p {
+  color: #FFFFFF;
+  font-size: 22pt;
+  font-weight: bold;
+  margin: 0;
+}
+.section-title {
+  color: #1C2833;
+  font-size: 13pt;
+  font-weight: bold;
+  margin: 0 0 8pt 0;
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Financial Performance (FY 2024)</h1>
+</div>
+<div class="content">
+  <div class="col">
+    <p class="section-title">Key Metrics</p>
+    <div class="highlight-card">
+      <h4>Revenue Growth</h4>
+      <p>+33.4%</p>
+    </div>
+    <div class="highlight-card">
+      <h4>Net Income Growth</h4>
+      <p>+114%</p>
+    </div>
+    <div class="metric-card">
+      <h4>Revenue</h4>
+      <p>$2.08B</p>
+    </div>
+    <div class="metric-card">
+      <h4>Net Income</h4>
+      <p>$377M</p>
+    </div>
+  </div>
+  <div class="col">
+    <p class="section-title">Profitability</p>
+    <div class="metric-card">
+      <h4>Gross Margin</h4>
+      <p>60%</p>
+    </div>
+    <div class="metric-card">
+      <h4>ROE</h4>
+      <p>16.2%</p>
+    </div>
+    <div class="metric-card">
+      <h4>ROA</h4>
+      <p>8.4%</p>
+    </div>
+    <p class="section-title">Balance Sheet</p>
+    <div class="metric-card">
+      <h4>Debt/Equity</h4>
+      <p>0.60</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

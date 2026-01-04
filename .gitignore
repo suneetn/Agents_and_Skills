@@ -1,0 +1,126 @@
+# =============================================================================
+# Personal Workspace .gitignore
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# OS Generated Files
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+venv/
+.venv/
+ENV/
+
+# -----------------------------------------------------------------------------
+# IDE / Editor
+# -----------------------------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.cursor/
+.obsidian/
+
+# -----------------------------------------------------------------------------
+# Node.js
+# -----------------------------------------------------------------------------
+node_modules/
+package-lock.json
+
+# -----------------------------------------------------------------------------
+# MCP / Tool Configuration
+# -----------------------------------------------------------------------------
+.mcp.json
+
+# -----------------------------------------------------------------------------
+# Logs
+# -----------------------------------------------------------------------------
+*.log
+logs/
+
+# -----------------------------------------------------------------------------
+# Personal / Sensitive (IMPORTANT!)
+# -----------------------------------------------------------------------------
+# Family matters - keep private
+dad/
+
+# YouTube transcripts and metadata (large files, can be regenerated)
+youtube/transcripts/
+youtube/metadata/
+
+# -----------------------------------------------------------------------------
+# Generated Output (can be regenerated)
+# -----------------------------------------------------------------------------
+# Newsletter output files (keep templates, ignore generated)
+capabilities/daily-stock-newsletter/output/newsletter_20*.html
+capabilities/daily-stock-newsletter/output/newsletter_20*.txt
+capabilities/daily-stock-newsletter/output/newsletter_actionable_*.html
+capabilities/daily-stock-newsletter/output/newsletter_actionable_*.txt
+capabilities/daily-stock-newsletter/output/newsletter_fixed_*.html
+capabilities/daily-stock-newsletter/output/newsletter_fixed_*.txt
+capabilities/daily-stock-newsletter/output/newsletter_data_*.json
+capabilities/daily-stock-newsletter/output/multi_screen_newsletter_*.html
+capabilities/daily-stock-newsletter/output/test_*.html
+capabilities/daily-stock-newsletter/output/latest_actionable.html
+
+# Stock analysis reports - KEPT IN GIT per user preference
+# stock_analysis/
+
+# Test files at root
+test_newsletter.html
+test_newsletter.txt
+
+# Backup files
+*.backup
+*.bak
+
+# -----------------------------------------------------------------------------
+# Temporary / Work-in-Progress files at root
+# -----------------------------------------------------------------------------
+# These are drafts/iterations that can be cleaned up
+newsletter_v[0-9].html
+newsletter_v[0-9][0-9].html
+
+# -----------------------------------------------------------------------------
+# BMAD output (generated artifacts)
+# -----------------------------------------------------------------------------
+_bmad-output/
+
+# -----------------------------------------------------------------------------
+# Symlink folder (not needed in git)
+# -----------------------------------------------------------------------------
+~/
+
+# -----------------------------------------------------------------------------
+# API Keys / Secrets
+# -----------------------------------------------------------------------------
+*.env
+.env.*
+.fmp_config.sh
+secrets.json
+credentials.json

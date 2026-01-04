@@ -1,0 +1,334 @@
+# Cursor Rules - Skills-Aware Agent Configuration
+
+## Overview
+
+This project uses Claude Skills stored in `~/.claude/skills/` to provide specialized capabilities. The agent should be aware of these skills and use them when appropriate.
+
+## Skills Directory
+
+**Location:** `~/.claude/skills/`
+
+All skills are stored as directories containing `SKILL.md` files with detailed instructions, workflows, and examples.
+
+## Available Skills
+
+The following skills are available and should be used when relevant:
+
+### 1. Stock Analyst (`stock-analyst`)
+**When to use:** Stock analysis, fundamental analysis, technical analysis, investment recommendations
+**Location:** `~/.claude/skills/stock-analyst/SKILL.md`
+**Scripts:** 
+- `~/.claude/skills/stock-analyst/scripts/stock_analysis_fmp.py` - Fundamental analysis using FMP API
+- `~/.claude/skills/stock-analyst/scripts/stock_technical_analysis.py` - Technical analysis with indicators
+**API Key:** Set via `FMP_API_KEY` environment variable
+
+### 2. Company Research (`company-research`)
+**When to use:** Comprehensive company research, investment evaluation, sentiment analysis
+**Location:** `~/.claude/skills/company-research/SKILL.md`
+**Features:** Multi-source research, financial data extraction, sentiment analysis, investment recommendations
+
+### 3. Researcher (`researcher`)
+**When to use:** Multi-source research on any topic (travel, food, technology, science, finance, etc.)
+**Location:** `~/.claude/skills/researcher/SKILL.md`
+**Features:** YouTube research, web search, browser tools, information synthesis
+
+### 4. YouTube (`youtube`)
+**When to use:** YouTube video search, transcript extraction, video analysis
+**Location:** `~/.claude/skills/youtube/SKILL.md`
+**Scripts:** `~/.claude/skills/youtube/scripts/extract_video.py`
+
+### 5. LinkedIn Article (`linkedin-article`)
+**When to use:** Creating LinkedIn articles and posts
+**Location:** `~/.claude/skills/linkedin-article/SKILL.md`
+
+### 6. LinkedIn Article Tech (`linkedin-article-tech`)
+**When to use:** Creating tech-focused LinkedIn content
+**Location:** `~/.claude/skills/linkedin-article-tech/SKILL.md`
+
+### 7. PowerPoint (`pptx`)
+**When to use:** Creating and manipulating PowerPoint presentations
+**Location:** `~/.claude/skills/pptx/SKILL.md`
+
+### 8. PowerPoint Custom (`pptx-custom`)
+**When to use:** Custom PowerPoint creation
+**Location:** `~/.claude/skills/pptx-custom/SKILL.md`
+
+### 9. PowerPoint Intuit (`pptx-intuit`)
+**When to use:** Intuit-specific PowerPoint creation
+**Location:** `~/.claude/skills/pptx-intuit/SKILL.md`
+
+### 10. Soundbite Writer (`soundbite-writer`)
+**When to use:** Creating soundbites and short content
+**Location:** `~/.claude/skills/soundbite-writer/SKILL.md`
+
+### 11. Todoist (`todoist`)
+**When to use:** Todoist integration and task management
+**Location:** `~/.claude/skills/todoist/SKILL.md`
+
+### 12. Skill Builder (`skill-builder`)
+**When to use:** Creating new Claude Code skills from scratch, editing existing skills to improve their descriptions or structure, or converting Claude Code sub-agents to skills
+**Location:** `~/.claude/skills/skill-builder/SKILL.md`
+**Features:** Interactive skill creation guidance, skill editing and refinement, sub-agent to skill conversion, workflow design, Node.js and CLI tool integration
+**Reference Files:**
+- `~/.claude/skills/skill-builder/templates/skill-template.md` - Template for new skills
+- `~/.claude/skills/skill-builder/reference/` - Best practices and guides
+- `~/.claude/skills/skill-builder/converting-sub-agents-to-skills.md` - Conversion guide
+
+### 13. Writing Content in Personal Voice (`writing-content-in-personal-voice`)
+**When to use:** Creating LinkedIn posts, articles, frameworks, or any content in personal writing voice. Writing content that matches personal style with structured brevity, research-informed insights, and actionable frameworks.
+**Location:** `~/.claude/skills/writing-content-in-personal-voice/SKILL.md`
+**Features:** Structured brevity (50-150 words for LinkedIn), actionable frameworks, research-informed insights, contrarian clarity, authentic expertise voice
+**Reference Files:**
+- `~/.claude/skills/writing-content-in-personal-voice/reference/voice-principles.md` - Complete voice characteristics
+- `~/.claude/skills/writing-content-in-personal-voice/reference/content-structures.md` - Format-specific patterns
+- `~/.claude/skills/writing-content-in-personal-voice/reference/language-patterns.md` - Opening hooks, framework intros, closing patterns
+- `~/.claude/skills/writing-content-in-personal-voice/reference/guidelines-checklist.md` - Complete do's and don'ts
+- `~/.claude/skills/writing-content-in-personal-voice/reference/sample-posts.md` - Sample posts demonstrating the voice
+
+### 14. Content Ideation (`content-ideation`)
+**When to use:** Brainstorming content topics, generating ideas for posts or articles, exploring angles and hooks, or developing content themes. Ideating LinkedIn post topics, article ideas, framework concepts, or any content that needs creative ideation.
+**Location:** `~/.claude/skills/content-ideation/SKILL.md`
+**Features:** Multiple brainstorming techniques, angle exploration, hook development, idea evaluation, prioritization framework
+**Reference Files:**
+- `~/.claude/skills/content-ideation/reference/ideation-methods.md` - Complete brainstorming techniques
+- `~/.claude/skills/content-ideation/reference/evaluation-criteria.md` - Detailed idea evaluation framework
+- `~/.claude/skills/content-ideation/reference/hook-patterns.md` - Hook types and examples
+
+### 15. Content Creation (`content-creation`)
+**When to use:** Creating content from ideation to final draft, including brainstorming topics, researching information, structuring content, writing in personal voice, and refining the output. Orchestrates the complete content creation workflow from idea to published content.
+**Location:** `~/.claude/skills/content-creation/SKILL.md`
+**Features:** End-to-end workflow orchestration, skill coordination (ideation → research → writing), quality validation, refinement process
+**Reference Files:**
+- `~/.claude/skills/content-creation/reference/workflow-steps.md` - Detailed step-by-step guidance
+- `~/.claude/skills/content-creation/reference/integration-patterns.md` - How skills coordinate together
+- `~/.claude/skills/content-creation/reference/quality-checklist.md` - Content quality validation
+
+### 16. Stock Screener (`stock-screener`)
+**When to use:** Screening and discovering stocks based on technical indicators (RSI, MACD, trends) or fundamental metrics (P/E, ROE, growth). Finding momentum, value, growth, or oversold stocks.
+**Location:** `~/.claude/skills/stock-screener/SKILL.md`
+**Features:** FMP API integration, 6 predefined screens (momentum, value, growth, quality, oversold, technical_buy), growth-adjusted FMP ratings, sector filtering
+**Scripts:**
+- `~/.claude/skills/stock-screener/scripts/stock_screener.py` - Main screening logic
+- `~/.claude/skills/stock-screener/scripts/screen_definitions.py` - Screen criteria definitions
+
+### 17. Newsletter Formatter (`newsletter-formatter`)
+**When to use:** Formatting content into professional HTML email newsletters. Generating stock picks newsletters, market summaries, or comparison tables for email delivery.
+**Location:** `~/.claude/skills/newsletter-formatter/SKILL.md`
+**Features:** Jinja2 templates, responsive HTML design, sparkline chart generation, plain text fallback
+**Scripts:**
+- `~/.claude/skills/newsletter-formatter/scripts/newsletter_generator.py` - Template rendering
+- `~/.claude/skills/newsletter-formatter/scripts/sparkline_generator.py` - Chart generation
+**Templates:** `~/.claude/skills/newsletter-formatter/templates/`
+
+### 18. Email Sender (`email-sender`)
+**When to use:** Sending emails via Mailgun API. Managing subscriber lists, sending newsletters to audiences, tracking delivery status.
+**Location:** `~/.claude/skills/email-sender/SKILL.md`
+**Features:** Mailgun integration, subscriber CSV management, retry logic with exponential backoff, newsletter archiving
+**Scripts:** `~/.claude/skills/email-sender/scripts/email_sender.py`
+**Data:** `~/.claude/skills/email-sender/data/subscribers.csv`
+
+### 19. Daily Newsletter (SLASH COMMAND)
+**When to use:** Generating and sending daily stock newsletter emails with AI-enhanced investment thesis.
+**Trigger:** `/newsletter` (Cursor slash command)
+**Location:** `.cursor/commands/newsletter.md`
+**Features:** Multi-skill orchestration (stock-screener → analyst-light → newsletter-formatter → email-sender), AI-generated thesis, email-safe HTML
+**Usage Examples:**
+- `/newsletter` — Momentum screen, preview only
+- `/newsletter growth value` — Multi-screen
+- `/newsletter momentum send to user@email.com` — Send to specific email
+**Note:** This is a Cursor slash command, NOT a skill. Claude orchestrates the individual skills directly.
+
+### 20. Analyst Light (`analyst-light`)
+**When to use:** Quick actionable trade setups with entry, target, stop loss, and mini-thesis. Fast analysis (5 seconds per stock) when full analyst depth is not needed.
+**Location:** `~/.claude/skills/analyst-light/SKILL.md`
+**Features:** Entry/target/stop calculation, risk:reward ratio, mini-thesis generation, trend bias detection
+**Scripts:** `~/.claude/skills/analyst-light/scripts/analyst_light.py`
+**Trigger Phrases:** "Trade setup for X", "Where should I buy X?", "Entry and target for X", "Quick analysis on X"
+
+## How to Use Skills
+
+### Skill Discovery
+
+1. **Check Skills Directory:** When a user request matches a skill's description, check `~/.claude/skills/[skill-name]/SKILL.md`
+2. **Read Skill Documentation:** Each `SKILL.md` file contains:
+   - When to use the skill
+   - Core capabilities
+   - Detailed workflows
+   - Tool usage instructions
+   - Examples
+   - Output templates
+
+### Skill Execution
+
+1. **Identify Relevant Skill:** Match user request to skill description
+2. **Read Skill Instructions:** Load and read the `SKILL.md` file
+3. **Follow Workflow:** Execute the workflow described in the skill
+4. **Use Required Tools:** Follow tool usage instructions (scripts, APIs, browser tools, etc.)
+5. **Generate Output:** Use output templates provided in the skill
+
+### Example: Stock Analysis
+
+When user asks "Analyze NVDA":
+
+1. **Identify:** Request matches `stock-analyst` skill
+2. **Read:** Load `~/.claude/skills/stock-analyst/SKILL.md`
+3. **Execute:**
+   - Run `python3 ~/.claude/skills/stock-analyst/scripts/stock_analysis_fmp.py NVDA` for fundamental analysis
+   - Run `python3 ~/.claude/skills/stock-analyst/scripts/stock_technical_analysis.py NVDA` for technical analysis
+   - Combine results per skill instructions
+4. **Output:** Generate comprehensive analysis report using skill template
+
+## Important Configuration
+
+### Environment Variables
+
+- **FMP_API_KEY:** Required for stock analysis (set via `export FMP_API_KEY=your_key`)
+- **MAILGUN_API_KEY:** Required for email sending
+- **MAILGUN_DOMAIN:** Email domain (default: mail.quanthub.ai)
+
+### Script Locations
+
+All scripts are located within their respective skills at `~/.claude/skills/[skill-name]/scripts/`
+
+## Skill File Format
+
+Each skill follows this structure:
+
+```markdown
+---
+name: skill-name
+description: Brief description telling when to use this skill
+---
+
+# Skill Name
+
+## When to Use This Skill
+[Clear scenarios]
+
+## Core Capabilities
+[Detailed capabilities]
+
+## Workflow
+[Step-by-step process]
+
+## Tool Usage Instructions
+[How to use tools/scripts]
+
+## Examples
+[Concrete examples]
+```
+
+## Best Practices
+
+1. **Always Check Skills First:** Before implementing custom solutions, check if a skill exists
+2. **Follow Skill Instructions:** Skills contain tested workflows - follow them
+3. **Use Skill Scripts:** Skills often reference scripts - use them as specified
+4. **Read Full Documentation:** Don't skip sections - skills have comprehensive instructions
+5. **Use Output Templates:** Skills provide output templates - use them for consistency
+6. **Combine Skills When Appropriate:** Some skills work together (e.g., researcher + company-research)
+
+## Skill Integration Examples
+
+### Example 1: Stock Analysis Request
+**User:** "Analyze NVDA"
+**Process:**
+1. Identify `stock-analyst` skill
+2. Read `~/.claude/skills/stock-analyst/SKILL.md`
+3. Execute fundamental analysis script
+4. Execute technical analysis script
+5. Combine results per skill instructions
+6. Generate report using skill template
+
+### Example 2: Company Research Request
+**User:** "Research Apple Inc. for investment"
+**Process:**
+1. Identify `company-research` skill
+2. Read `~/.claude/skills/company-research/SKILL.md`
+3. May also use `researcher` skill for general info gathering
+4. Follow prescribed source hierarchy
+5. Generate investment research report
+
+### Example 3: Multi-Skill Request
+**User:** "Research NVDA and create a LinkedIn article about it"
+**Process:**
+1. Use `company-research` or `stock-analyst` for research
+2. Use `linkedin-article` for content creation
+3. Combine outputs appropriately
+
+### Example 4: Skill Creation Request
+**User:** "Help me create a skill for deploying AWS Lambda functions"
+**Process:**
+1. Identify `skill-builder` skill
+2. Read `~/.claude/skills/skill-builder/SKILL.md`
+3. Follow interactive guidance to gather requirements
+4. Design skill structure with proper naming conventions
+5. Create SKILL.md with YAML frontmatter
+6. Add supporting files with intention-revealing names
+7. Validate skill format and description
+
+### Example 5: Daily Newsletter Request (Slash Command)
+**User:** `/newsletter momentum growth send to user@email.com`
+**Process:**
+1. Parse request: screens=[momentum, growth], recipient=user@email.com
+2. Use `stock-screener` skill: Screen stocks for each type
+3. Use `analyst-light` skill: Get trade setups for each stock
+4. **Claude generates AI thesis**: Unique, rich investment thesis for each stock
+5. Use `newsletter-formatter` skill: Render email-safe HTML template
+6. Use `email-sender` skill: Send via Mailgun
+7. Confirm delivery
+
+**Key Difference:** Claude orchestrates individual skills and injects AI intelligence, rather than running a monolithic Python script.
+
+## Code Execution Guidelines
+
+When skills reference scripts:
+
+1. **Check Script Exists:** Verify script location
+2. **Set Required Environment Variables:** Ensure API keys, etc. are set
+3. **Run Scripts:** Execute as specified in skill documentation
+4. **Handle Errors:** Follow error handling guidelines in skills
+5. **Parse Output:** Extract relevant data from script output
+6. **Integrate Results:** Use results in final output per skill instructions
+
+## File Organization
+
+- **Skills:** `~/.claude/skills/[skill-name]/SKILL.md`
+- **Scripts:** `~/.claude/skills/[skill-name]/scripts/`
+- **Research Output:** `~/personal/research/[topic]/`
+- **Content Output:** `~/personal/content/[type]/[topic]/`
+- **Analysis Output:** `~/personal/stock_analysis/`
+
+## Notes
+
+- Skills are automatically loaded by Claude - you don't need to manually import them
+- Skills contain comprehensive instructions - read them fully before executing
+- Skills may reference other skills - follow the integration instructions
+- Skills are living documents - they may be updated, so always read the latest version
+- Some skills require API keys or external tools - check prerequisites before use
+
+## Quick Reference
+
+**To use a skill:**
+1. Identify which skill matches the user's request
+2. Read `~/.claude/skills/[skill-name]/SKILL.md`
+3. Follow the workflow and instructions
+4. Use referenced scripts/tools as specified
+5. Generate output using skill templates
+
+**To discover available skills:**
+- List directory: `ls ~/.claude/skills/`
+- Read skill descriptions in frontmatter of each `SKILL.md`
+- Check "When to Use This Skill" section
+
+**To add a new skill:**
+- Create directory: `mkdir -p ~/.claude/skills/[skill-name]`
+- Create `SKILL.md` with proper format (see skill file format above)
+- Update this `.cursorrules` file to include the new skill
+
+---
+
+*Last Updated: January 3, 2026*
+*Skills Directory: ~/.claude/skills/*
+*Total Skills Available: 20*
+
+
