@@ -60,19 +60,27 @@ git push
 git clone https://github.com/suneetn/Agents_and_Skills.git
 cd Agents_and_Skills
 
-# Decrypt and load secrets (enter your password)
+# Option A: Load into current session only (no file created)
 source ./scripts/decrypt-secrets.sh
 
-# Verify
-echo $FMP_API_KEY | head -c 8
+# Option B: Create persistent .env file
+./scripts/decrypt-secrets.sh --persist
 ```
 
-### Step 4: Auto-load on Shell Startup (Optional)
+### Step 4: Auto-load on Shell Startup
 
-Add to your shell profile (`~/.zshrc`, `~/.bashrc`, or PowerShell profile):
+**If you used `--persist` (creates .env file):**
 
+Add to `~/.zshrc` or `~/.bashrc`:
 ```bash
-# Add to ~/.zshrc or ~/.bashrc
+# Auto-load API keys from .env
+set -a; source ~/Agents_and_Skills/.env 2>/dev/null; set +a
+```
+
+**If you prefer on-demand loading:**
+
+Add an alias:
+```bash
 alias load-secrets='cd ~/Agents_and_Skills && source ./scripts/decrypt-secrets.sh && cd -'
 ```
 
