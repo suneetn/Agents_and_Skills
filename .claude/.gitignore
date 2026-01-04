@@ -1,0 +1,9 @@
+# Transient/session data - don't version
+history.jsonl
+shell-snapshots/
+statsig/
+todos/
+ide/
+.obsidian/
+projects/
+

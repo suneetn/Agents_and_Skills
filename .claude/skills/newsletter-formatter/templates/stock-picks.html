@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Header -->
+<div class="header">
+    <h1>{{ title | default('Daily Stock Picks') }}</h1>
+    <p class="subtitle">{{ subtitle | default('Top picks based on momentum & growth analysis') }}</p>
+    <p class="date">{{ date }} {% if edition %}• Edition #{{ edition }}{% endif %}</p>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    
+    {% if market_summary %}
+    <!-- Market Summary -->
+    <h2 class="section-header">📊 Market Summary</h2>
+    <div class="market-summary">
+        <p>{{ market_summary }}</p>
+    </div>
+    {% endif %}
+    
+    <!-- Stock Picks -->
+    <h2 class="section-header">🎯 Today's Top Picks</h2>
+    
+    <table class="stock-table" role="presentation">
+        <thead>
+            <tr>
+                <th style="width: 8%;">#</th>
+                <th style="width: 25%;">Stock</th>
+                <th style="width: 17%;">Price</th>
+                <th style="width: 15%;">Rating</th>
+                <th style="width: 20%;">Growth</th>
+                <th style="width: 15%;">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>
+                    <span class="stock-rank">{{ stock.rank }}</span>
+                </td>
+                <td>
+                    <span class="stock-ticker">{{ stock.ticker }}</span>
+                    <span class="stock-name">{{ stock.name | truncate(25) }}</span>
+                </td>
+                <td>
+                    <span class="stock-price">${{ "%.2f" | format(stock.price) }}</span>
+                    <br>
+                    {% if stock.change_percent >= 0 %}
+                    <span class="stock-change-positive">+{{ "%.1f" | format(stock.change_percent) }}%</span>
+                    {% else %}
+                    <span class="stock-change-negative">{{ "%.1f" | format(stock.change_percent) }}%</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if stock.fmp_rating %}
+                    {% set rec = stock.fmp_rating.recommendation | lower | replace(' ', '-') %}
+                    <span class="rating-badge rating-{{ rec }}">
+                        {{ stock.fmp_rating.grade }}
+                    </span>
+                    <br>
+                    <span style="font-size: 10px; color: #718096;">{{ stock.fmp_rating.recommendation }}</span>
+                    {% else %}
+                    <span style="color: #a0aec0;">N/A</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if stock.growth %}
+                    <span class="growth-metric">
+                        Rev: 
+                        {% if stock.growth.revenue_growth >= 0 %}
+                        <span class="growth-positive">+{{ "%.0f" | format(stock.growth.revenue_growth) }}%</span>
+                        {% else %}
+                        <span class="growth-negative">{{ "%.0f" | format(stock.growth.revenue_growth) }}%</span>
+                        {% endif %}
+                    </span>
+                    <br>
+                    <span class="growth-metric">
+                        EPS: 
+                        {% if stock.growth.eps_growth >= 0 %}
+                        <span class="growth-positive">+{{ "%.0f" | format(stock.growth.eps_growth) }}%</span>
+                        {% else %}
+                        <span class="growth-negative">{{ "%.0f" | format(stock.growth.eps_growth) }}%</span>
+                        {% endif %}
+                    </span>
+                    {% else %}
+                    <span style="color: #a0aec0; font-size: 11px;">N/A</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <span style="font-weight: 600; font-size: 14px;">{{ "%.0f" | format(stock.score) }}</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: {{ stock.score }}%;"></div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% if include_details %}
+    <!-- Detailed Analysis -->
+    <h2 class="section-header">📈 Quick Analysis</h2>
+    {% for stock in stocks[:3] %}
+    <div style="margin-bottom: 20px; padding: 15px; background-color: #f7fafc; border-radius: 8px; border-left: 4px solid #4fd1c5;">
+        <h3 style="margin: 0 0 8px 0; color: #1a202c; font-size: 16px;">
+            #{{ stock.rank }} {{ stock.ticker }} - {{ stock.name }}
+        </h3>
+        <p style="margin: 0; color: #4a5568; font-size: 13px; line-height: 1.5;">
+            {% if stock.fmp_rating and stock.fmp_rating.adjusted %}
+            <strong>Growth-Adjusted Rating:</strong> {{ stock.fmp_rating.grade }} ({{ stock.fmp_rating.recommendation }})
+            {% endif %}
+            {% if stock.metrics and stock.metrics.pe_ratio %}
+            • P/E: {{ "%.1f" | format(stock.metrics.pe_ratio) }}
+            {% endif %}
+            {% if stock.metrics and stock.metrics.price_vs_50sma %}
+            • vs 50 SMA: {{ "%+.1f" | format(stock.metrics.price_vs_50sma) }}%
+            {% endif %}
+        </p>
+    </div>
+    {% endfor %}
+    {% endif %}
+    
+    <!-- Call to Action -->
+    <div style="text-align: center; margin: 30px 0;">
+        <p style="color: #718096; font-size: 13px; margin: 0;">
+            Screen: <strong>{{ screen_type | default('Momentum') | title }}</strong> 
+            • Stocks Analyzed: <strong>{{ total_screened | default('500+') }}</strong>
+            • Generated: <strong>{{ timestamp | default('Today') }}</strong>
+        </p>
+    </div>
+    
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p><strong>QuantHub Daily</strong></p>
+    <p>Powered by AI-driven stock analysis</p>
+    <p class="disclaimer">
+        {{ footer_text | default('This newsletter is for informational purposes only and does not constitute financial advice. Always do your own research before making investment decisions.') }}
+    </p>
+</div>
+{% endblock %}
+
+
+

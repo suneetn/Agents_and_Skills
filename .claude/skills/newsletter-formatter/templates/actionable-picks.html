@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        /* Reset and Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1a202c;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        /* Container */
+        .email-container {
+            max-width: 760px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left h1 {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+        }
+        .header-left .tagline {
+            color: #7dd3fc;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+        }
+        .header-right {
+            text-align: right;
+        }
+        .header-right .date {
+            color: #e2e8f0;
+            font-size: 13px;
+        }
+        .header-right .edition {
+            color: #7dd3fc;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        /* Summary Stats Bar */
+        .summary-bar {
+            background: #f1f5f9;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-label {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 2px;
+        }
+        .stat-value.highlight { color: #059669; }
+        .stat-value.warning { color: #d97706; }
+        
+        /* Top Pick Alert */
+        .top-pick-alert {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .top-pick-alert .badge {
+            background: #10b981;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .top-pick-alert .text {
+            color: #065f46;
+            font-size: 13px;
+        }
+        .top-pick-alert strong { color: #047857; }
+        
+        /* Content */
+        .content {
+            padding: 20px 24px;
+        }
+        
+        /* Section Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0 8px 0;
+            margin-top: 16px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .section-header:first-of-type {
+            margin-top: 0;
+        }
+        .section-icon { font-size: 16px; }
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-count {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+        
+        /* Main Table Header - shown once - now with separate Grade column */
+        .main-table-header {
+            display: grid;
+            grid-template-columns: 75px 42px minmax(130px, 1fr) 90px 68px 68px 58px 50px;
+            gap: 5px;
+            padding: 10px 12px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 10px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .main-table-header .center { text-align: center; }
+        .main-table-header .right { text-align: right; }
+        
+        /* Stock List */
+        .stock-list {
+            margin-bottom: 8px;
+        }
+        
+        /* Expandable Stock Row - matches header grid */
+        .stock-expandable {
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .stock-expandable summary {
+            display: grid;
+            grid-template-columns: 75px 42px minmax(130px, 1fr) 90px 68px 68px 58px 50px;
+            gap: 5px;
+            padding: 12px;
+            cursor: pointer;
+            list-style: none;
+            align-items: center;
+            transition: background 0.15s;
+        }
+        .stock-expandable summary::-webkit-details-marker { display: none; }
+        .stock-expandable summary:hover {
+            background: #f8fafc;
+        }
+        .stock-expandable[open] summary {
+            background: #fafafa;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        /* Ticker Cell */
+        .ticker-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .expand-hint {
+            font-size: 10px;
+            color: #94a3b8;
+            transition: transform 0.2s ease, color 0.15s;
+            display: inline-block;
+        }
+        .stock-expandable summary:hover .expand-hint {
+            color: #3b82f6;
+        }
+        .stock-expandable[open] .expand-hint {
+            transform: rotate(90deg);
+            color: #3b82f6;
+        }
+        .ticker {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .quality-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        .quality-badge.grade-a { background: #dcfce7; color: #166534; }
+        .quality-badge.grade-b { background: #fef9c3; color: #854d0e; }
+        .quality-badge.grade-c { background: #fed7aa; color: #9a3412; }
+        .quality-badge.grade-d { background: #fecaca; color: #991b1b; }
+        
+        /* Grade Cell - centered */
+        .grade-cell {
+            text-align: center;
+        }
+        
+        /* Sentiment badges */
+        .sentiment-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            margin-left: 8px;
+            text-transform: capitalize;
+        }
+        .sentiment-badge.sentiment-bullish { background: #dcfce7; color: #166534; }
+        .sentiment-badge.sentiment-cautiously-bullish { background: #d1fae5; color: #047857; }
+        .sentiment-badge.sentiment-neutral { background: #f1f5f9; color: #64748b; }
+        .sentiment-badge.sentiment-cautiously-bearish { background: #fef3c7; color: #92400e; }
+        .sentiment-badge.sentiment-bearish { background: #fecaca; color: #991b1b; }
+        
+        /* Company Cell - allows wrapping on long names */
+        .company-cell {
+            color: #475569;
+            font-size: 12px;
+            line-height: 1.3;
+            /* Allow text to wrap if needed */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Price Cell */
+        .price-cell {
+            text-align: right;
+        }
+        .price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .change {
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+        .change.positive { color: #16a34a; }
+        .change.negative { color: #dc2626; }
+        
+        /* Setup Cells */
+        .setup-cell {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .setup-cell.entry { color: #2563eb; }
+        .setup-cell.target { color: #16a34a; }
+        .setup-cell.stop { color: #dc2626; }
+        .setup-pct {
+            font-size: 10px;
+            color: #64748b;
+            margin-top: 1px;
+        }
+        
+        /* R:R Cell */
+        .rr-cell {
+            text-align: center;
+        }
+        .rr-badge {
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .rr-badge.excellent { background: #059669; color: #ffffff; }  /* Solid green for 2.5+ */
+        .rr-badge.good { background: #10b981; color: #ffffff; }       /* Green for 2.0+ */
+        .rr-badge.ok { background: #fbbf24; color: #78350f; }         /* Amber for 1.5-2.0 */
+        .rr-badge.poor { background: #ef4444; color: #ffffff; }       /* Red for <1.5 */
+        
+        /* Details Content (expanded) - subtle background */
+        .details-content {
+            padding: 16px 20px;
+            background: #fafafa;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        /* Thesis Box */
+        .thesis-box {
+            background: #ffffff;
+            border-left: 3px solid #10b981;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .thesis-label {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .thesis-text {
+            font-size: 13px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+        
+        /* Grade Breakdown Section */
+        .grade-breakdown {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        }
+        .breakdown-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+        .breakdown-grid {
+            display: flex;
+            gap: 16px;
+        }
+        .breakdown-item {
+            flex: 1;
+        }
+        .breakdown-label {
+            font-size: 9px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .breakdown-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 3px;
+        }
+        .breakdown-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        .breakdown-score {
+            font-size: 10px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .breakdown-detail {
+            font-size: 9px;
+            color: #64748b;
+            margin-top: 1px;
+        }
+        
+        /* Info Grid - 4 columns */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .info-item {
+            background: #ffffff;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        }
+        .info-label {
+            font-size: 9px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .info-value {
+            font-size: 12px;
+            color: #1e293b;
+            line-height: 1.4;
+        }
+        .info-value.risk { color: #dc2626; font-weight: 500; }
+        
+        /* News Section */
+        .news-section {
+            margin-top: 12px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+        .news-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .news-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            background: #f8fafc;
+            border-radius: 6px;
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.15s;
+            font-size: 11px;
+        }
+        .news-item:hover {
+            background: #e2e8f0;
+        }
+        .news-item.no-news {
+            color: #94a3b8;
+            font-style: italic;
+        }
+        .news-source {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .news-title {
+            color: #1e293b;
+            flex: 1;
+            line-height: 1.3;
+        }
+        .news-date {
+            color: #94a3b8;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        
+        /* Earnings Badge */
+        .earnings-badge {
+            margin-top: 8px;
+            padding: 6px 10px;
+            background: #fef3c7;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #92400e;
+        }
+        .earnings-icon {
+            margin-right: 4px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #f1f5f9;
+            padding: 16px 24px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer-brand {
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .footer-tagline {
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+        .footer-disclaimer {
+            color: #94a3b8;
+            font-size: 10px;
+            line-height: 1.5;
+            margin-top: 12px;
+        }
+        
+        /* Generation Info */
+        .gen-info {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 10px;
+            padding: 12px 24px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 700px) {
+            .summary-bar { flex-wrap: wrap; gap: 12px; }
+            .stat { flex: 1 1 45%; }
+            .main-table-header,
+            .stock-expandable summary { 
+                grid-template-columns: 60px 35px 1fr 75px 60px 60px 50px 45px;
+                font-size: 11px; 
+                padding: 10px 8px;
+            }
+            .info-grid { grid-template-columns: 1fr 1fr; }
+            .breakdown-grid { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="email-container">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>{{ header_title | default('QuantHub Daily') }}</h1>
+                    <div class="tagline">Actionable Trade Setups</div>
+                </div>
+                <div class="header-right">
+                    <div class="date">{{ date }}</div>
+                    <div class="edition">{{ edition_type | default('MULTI-SCREEN') }}</div>
+                </div>
+            </div>
+            
+            <!-- Summary Stats Bar -->
+            <div class="summary-bar">
+                <div class="stat">
+                    <div class="stat-label">Total Picks</div>
+                    <div class="stat-value">{{ total_stocks | default(0) }}</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Best R:R</div>
+                    <div class="stat-value highlight">{{ best_rr_stock | default('—') }} ({{ best_rr | default('—') }})</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Avg Quality</div>
+                    <div class="stat-value {% if avg_quality_score and avg_quality_score >= 70 %}highlight{% elif avg_quality_score and avg_quality_score >= 50 %}{% else %}warning{% endif %}">
+                        {{ avg_quality_grade | default('B') }}
+                    </div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Min R:R</div>
+                    <div class="stat-value">1.5:1</div>
+                </div>
+            </div>
+            
+            {% if top_pick %}
+            <!-- Top Pick Alert -->
+            <div class="top-pick-alert">
+                <span class="badge">🎯 Top Pick</span>
+                <span class="text"><strong>{{ top_pick.ticker }}</strong> — {{ top_pick.reason }}</span>
+            </div>
+            {% endif %}
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Single Table Header for all sections - with separate Grade column -->
+                <div class="main-table-header">
+                    <div>Ticker</div>
+                    <div class="center">Grade</div>
+                    <div>Company</div>
+                    <div class="right">Price</div>
+                    <div class="center">Entry</div>
+                    <div class="center">Target</div>
+                    <div class="center">Stop</div>
+                    <div class="center">R:R</div>
+                </div>
+                
+                {% for section in sections %}
+                <!-- Section: {{ section.name }} -->
+                <div class="section-header">
+                    <span class="section-icon">{{ section.icon }}</span>
+                    <span class="section-title">{{ section.name }}</span>
+                    <span class="section-count">({{ section.stocks | length }})</span>
+                </div>
+                
+                <div class="stock-list">
+                    {% for stock in section.stocks %}
+                    {% set rr = stock.trade_setup.risk_reward | default(0) %}
+                    {% set quality_grade = stock.quality.grade | default('C') %}
+                    {% set sentiment = stock.thesis.sentiment | default('neutral') %}
+                    <details class="stock-expandable">
+                        <summary>
+                            <!-- Ticker cell (no grade badge anymore) -->
+                            <div class="ticker-wrap">
+                                <span class="expand-hint">▶</span>
+                                <span class="ticker">{{ stock.ticker }}</span>
+                            </div>
+                            <!-- Separate Grade cell -->
+                            <div class="grade-cell">
+                                <span class="quality-badge grade-{{ quality_grade | lower }}">{{ quality_grade }}</span>
+                            </div>
+                            <div class="company-cell">{{ stock.name }}</div>
+                            <div class="price-cell">
+                                <span class="price">${{ "%.2f" | format(stock.price) }}</span>
+                                <span class="change {{ 'positive' if stock.change_percent > 0 else 'negative' }}">
+                                    {{ "%+.1f" | format(stock.change_percent) }}%
+                                </span>
+                            </div>
+                            <div class="setup-cell entry">
+                                ${{ "%.0f" | format(stock.trade_setup.entry.zone[0]) }}-{{ "%.0f" | format(stock.trade_setup.entry.zone[1]) }}
+                            </div>
+                            <div class="setup-cell target">
+                                ${{ "%.0f" | format(stock.trade_setup.target.price) }}
+                                <div class="setup-pct">+{{ "%.0f" | format(stock.trade_setup.target.upside_percent) }}%</div>
+                            </div>
+                            <div class="setup-cell stop">
+                                ${{ "%.0f" | format(stock.trade_setup.stop.price) }}
+                                <div class="setup-pct">-{{ "%.0f" | format(stock.trade_setup.stop.downside_percent) }}%</div>
+                            </div>
+                            <div class="rr-cell">
+                                <span class="rr-badge {% if rr >= 2.5 %}excellent{% elif rr >= 2 %}good{% elif rr >= 1.5 %}ok{% else %}poor{% endif %}">
+                                    {{ "%.1f" | format(rr) }}
+                                </span>
+                            </div>
+                        </summary>
+                        
+                        <!-- Expanded Details -->
+                        <div class="details-content">
+                            {% if stock.thesis and stock.thesis.summary %}
+                            <div class="thesis-box">
+                                <div class="thesis-label">
+                                    💡 Investment Thesis
+                                    {% if sentiment != 'neutral' %}
+                                    <span class="sentiment-badge sentiment-{{ sentiment | replace(' ', '-') }}">{{ sentiment }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="thesis-text">{{ stock.thesis.summary }}</div>
+                            </div>
+                            {% endif %}
+                            
+                            <!-- Grade Breakdown Section -->
+                            {% if stock.quality.breakdown %}
+                            <div class="grade-breakdown">
+                                <div class="breakdown-header">📊 Grade Breakdown ({{ stock.quality.score }}/100)</div>
+                                <div class="breakdown-grid">
+                                    {% for key, item in stock.quality.breakdown.items() %}
+                                    <div class="breakdown-item">
+                                        <div class="breakdown-label">{{ item.label }}</div>
+                                        <div class="breakdown-bar">
+                                            <div class="breakdown-fill" style="width: {{ (item.points / item.max * 100) | round }}%"></div>
+                                        </div>
+                                        <div class="breakdown-score">{{ item.points }}/{{ item.max }}</div>
+                                        <div class="breakdown-detail">{{ item.detail }}</div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">⚠️ Key Risk</div>
+                                    <div class="info-value risk">{{ stock.thesis.top_risk | default('Market risk') }}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">⏱️ Timeframe</div>
+                                    <div class="info-value">{{ stock.trade_setup.timeframe | default('2-4 months') }}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">📊 Entry Reason</div>
+                                    <div class="info-value">{{ stock.trade_setup.entry.reason | default('Technical setup') }}</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">🎯 Target Reason</div>
+                                    <div class="info-value">{{ stock.trade_setup.target.reason | default('ATR-based target') }}</div>
+                                </div>
+                            </div>
+                            
+                            {% if stock.research %}
+                            <!-- News Section - Multiple Clickable Articles -->
+                            <div class="news-section">
+                                <div class="news-header">📰 Recent News</div>
+                                <div class="news-list">
+                                    {% if stock.research.news and stock.research.news|length > 0 %}
+                                        {% for news in stock.research.news[:3] %}
+                                        <a href="{{ news.url }}" target="_blank" class="news-item" title="{{ news.title }}">
+                                            <span class="news-source">{{ news.source | default('News') }}</span>
+                                            <span class="news-title">{{ news.title[:55] }}{% if news.title|length > 55 %}...{% endif %}</span>
+                                            <span class="news-date">{{ news.date }}</span>
+                                        </a>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="news-item no-news">No recent news for {{ stock.ticker }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Earnings Info -->
+                            {% if stock.research.earnings and stock.research.earnings.date %}
+                            <div class="earnings-badge">
+                                <span class="earnings-icon">📅</span>
+                                <strong>Earnings:</strong> {{ stock.research.earnings.date }}
+                                {% if stock.research.earnings.eps_estimate %}
+                                | Est. EPS: ${{ "%.2f" | format(stock.research.earnings.eps_estimate) }}
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </details>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Generation Info -->
+            <div class="gen-info">
+                Generated: {{ generated_at }} | Screens: {{ screens_used | join(', ') }} | Min R:R: 1.5:1
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-brand">{{ header_title | default('QuantHub Daily') }}</div>
+                <div class="footer-tagline">AI-Powered • Risk-Adjusted • Actionable</div>
+                <div class="footer-disclaimer">
+                    For informational purposes only. Not financial advice. 
+                    Always do your own research before making investment decisions.
+                </div>
+            </div>
+        </div>
+    </center>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>QuantHub Daily - {{ date }}</title>
+    <!--[if mso]>
+    <style type="text/css">
+        table { border-collapse: collapse; }
+        .outlook-fallback { display: block !important; }
+    </style>
+    <![endif]-->
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f4f7; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+    
+    <!-- Wrapper Table -->
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4f4f7;">
+        <tr>
+            <td align="center" style="padding: 20px 10px;">
+                
+                <!-- Main Container -->
+                <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); padding: 24px 30px;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td>
+                                        <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 700;">QuantHub Daily</h1>
+                                        <p style="margin: 4px 0 0 0; color: #7dd3fc; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;">Actionable Trade Setups</p>
+                                    </td>
+                                    <td align="right" style="vertical-align: top;">
+                                        <p style="margin: 0; color: #e2e8f0; font-size: 13px;">{{ date }}</p>
+                                        <p style="margin: 2px 0 0 0; color: #7dd3fc; font-size: 10px; font-weight: 600; text-transform: uppercase;">
+                                            {% if screens|length > 1 %}MULTI-SCREEN EDITION{% else %}{{ screens[0]|upper }} PICKS{% endif %}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Summary Stats -->
+                    <tr>
+                        <td style="background-color: #f8fafc; padding: 16px 30px; border-bottom: 1px solid #e2e8f0;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td align="center" width="25%">
+                                        <p style="margin: 0; font-size: 10px; color: #64748b; text-transform: uppercase;">Total Picks</p>
+                                        <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 700; color: #1e293b;">{{ total_picks }}</p>
+                                    </td>
+                                    <td align="center" width="25%">
+                                        <p style="margin: 0; font-size: 10px; color: #64748b; text-transform: uppercase;">Best R:R</p>
+                                        <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 700; color: #059669;">{{ best_rr_pick }} ({{ best_rr_value }}:1)</p>
+                                    </td>
+                                    <td align="center" width="25%">
+                                        <p style="margin: 0; font-size: 10px; color: #64748b; text-transform: uppercase;">Avg Quality</p>
+                                        <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 700; color: #1e293b;">{{ avg_quality }}</p>
+                                    </td>
+                                    <td align="center" width="25%">
+                                        <p style="margin: 0; font-size: 10px; color: #64748b; text-transform: uppercase;">Min R:R</p>
+                                        <p style="margin: 4px 0 0 0; font-size: 18px; font-weight: 700; color: #1e293b;">1.5:1</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Top Pick Alert -->
+                    {% if best_rr_pick %}
+                    <tr>
+                        <td style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 12px 30px;">
+                            <span style="display: inline-block; background-color: #10b981; color: white; padding: 3px 10px; border-radius: 3px; font-size: 10px; font-weight: 700; text-transform: uppercase;">🎯 Top Pick</span>
+                            <span style="margin-left: 10px; color: #065f46; font-size: 14px;"><strong style="color: #047857;">{{ best_rr_pick }}</strong> — Best R:R setup at {{ best_rr_value }}:1</span>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 24px 30px;">
+                            
+                            {% for screen_type, stocks in stocks_by_screen.items() %}
+                            <!-- Screen Section: {{ screen_type }} -->
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom: 24px;">
+                                <!-- Screen Header -->
+                                <tr>
+                                    <td style="padding: 10px 0; border-bottom: 2px solid #e2e8f0;">
+                                        <span style="font-size: 16px;">
+                                            {% if screen_type == 'momentum' %}🚀{% elif screen_type == 'growth' %}📈{% elif screen_type == 'value' %}💎{% elif screen_type == 'tech_momentum' %}💻{% else %}📊{% endif %}
+                                        </span>
+                                        <span style="font-size: 14px; font-weight: 700; color: #334155; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px;">{{ screen_type|replace('_', ' ')|title }}</span>
+                                        <span style="color: #94a3b8; font-size: 12px; margin-left: 4px;">({{ stocks|length }})</span>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Table Header -->
+                                <tr>
+                                    <td>
+                                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top: 8px;">
+                                            <tr style="background-color: #f8fafc;">
+                                                <td style="padding: 8px 6px; font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase; width: 60px;">Ticker</td>
+                                                <td style="padding: 8px 6px; font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase; width: 40px; text-align: center;">Grade</td>
+                                                <td style="padding: 8px 6px; font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase;">Company</td>
+                                                <td style="padding: 8px 6px; font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase; text-align: right; width: 70px;">Price</td>
+                                                <td style="padding: 8px 6px; font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase; text-align: right; width: 65px;">Entry</td>
+                                                <td style="padding: 8px 6px; font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase; text-align: right; width: 55px;">Target</td>
+                                                <td style="padding: 8px 6px; font-size: 10px; font-weight: 600; color: #64748b; text-transform: uppercase; text-align: right; width: 50px;">R:R</td>
+                                            </tr>
+                                            
+                                            {% for stock in stocks %}
+                                            <!-- Stock Row -->
+                                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                                <td style="padding: 12px 6px;">
+                                                    <span style="font-weight: 700; color: #1e293b; font-size: 14px;">{{ stock.ticker }}</span>
+                                                </td>
+                                                <td style="padding: 12px 6px; text-align: center;">
+                                                    {% set grade = stock.quality.grade|default('C') %}
+                                                    {% if grade == 'A' %}
+                                                    <span style="display: inline-block; background-color: #059669; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">A</span>
+                                                    {% elif grade == 'B' %}
+                                                    <span style="display: inline-block; background-color: #0ea5e9; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">B</span>
+                                                    {% else %}
+                                                    <span style="display: inline-block; background-color: #94a3b8; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">{{ grade }}</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td style="padding: 12px 6px; color: #475569; font-size: 13px;">{{ stock.name[:30] }}{% if stock.name|length > 30 %}...{% endif %}</td>
+                                                <td style="padding: 12px 6px; text-align: right;">
+                                                    <span style="font-weight: 600; color: #1e293b;">${{ "%.2f"|format(stock.price) }}</span>
+                                                    {% set change = stock.change_percent|default(stock.change_pct|default(0)) %}
+                                                    <br><span style="font-size: 11px; color: {% if change >= 0 %}#059669{% else %}#dc2626{% endif %};">{% if change >= 0 %}+{% endif %}{{ "%.1f"|format(change) }}%</span>
+                                                </td>
+                                                <td style="padding: 12px 6px; text-align: right; color: #0ea5e9; font-size: 12px; font-weight: 600;">{{ stock.trade_setup.entry_zone|default('N/A') }}</td>
+                                                <td style="padding: 12px 6px; text-align: right; color: #059669; font-size: 12px; font-weight: 600;">${{ "%.0f"|format(stock.trade_setup.target.price|default(0)) if stock.trade_setup.target is mapping else stock.trade_setup.target|default('N/A') }}</td>
+                                                <td style="padding: 12px 6px; text-align: right;">
+                                                    {% set rr = stock.trade_setup.risk_reward|default(0) %}
+                                                    {% if rr >= 2.0 %}
+                                                    <span style="display: inline-block; background-color: #059669; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 700;">{{ "%.1f"|format(rr) }}</span>
+                                                    {% elif rr >= 1.5 %}
+                                                    <span style="display: inline-block; background-color: #f59e0b; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 700;">{{ "%.1f"|format(rr) }}</span>
+                                                    {% else %}
+                                                    <span style="display: inline-block; background-color: #94a3b8; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 700;">{{ "%.1f"|format(rr) }}</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            
+                                            <!-- Thesis Row (always visible in email) -->
+                                            <tr>
+                                                <td colspan="7" style="padding: 0 6px 16px 6px;">
+                                                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f8fafc; border-radius: 6px; border-left: 3px solid #3b82f6;">
+                                                        <tr>
+                                                            <td style="padding: 12px 16px;">
+                                                                <p style="margin: 0 0 8px 0; font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase;">
+                                                                    💡 Investment Thesis
+                                                                    {% if stock.thesis.sentiment|default('neutral') == 'bullish' %}
+                                                                    <span style="display: inline-block; background-color: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 3px; font-size: 9px; margin-left: 6px;">BULLISH</span>
+                                                                    {% elif stock.thesis.sentiment|default('neutral') == 'bearish' %}
+                                                                    <span style="display: inline-block; background-color: #fee2e2; color: #991b1b; padding: 2px 6px; border-radius: 3px; font-size: 9px; margin-left: 6px;">BEARISH</span>
+                                                                    {% endif %}
+                                                                </p>
+                                                                <p style="margin: 0; font-size: 13px; color: #334155; line-height: 1.5;">{{ stock.thesis.summary|default('Analysis pending.') }}</p>
+                                                                
+                                                                {% if stock.thesis.top_risk %}
+                                                                <p style="margin: 10px 0 0 0; font-size: 12px;">
+                                                                    <span style="color: #dc2626; font-weight: 600;">⚠️ Risk:</span>
+                                                                    <span style="color: #64748b;">{{ stock.thesis.top_risk }}</span>
+                                                                </p>
+                                                                {% endif %}
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            {% endfor %}
+                            
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer Timestamp -->
+                    <tr>
+                        <td style="padding: 12px 30px; background-color: #f8fafc; border-top: 1px solid #e2e8f0;">
+                            <p style="margin: 0; font-size: 11px; color: #94a3b8; text-align: center;">
+                                Generated: {{ timestamp }} | Screens: {{ screens|join(', ') }} | Min R:R: 1.5:1
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Disclaimer -->
+                    <tr>
+                        <td style="padding: 24px 30px; background-color: #1e293b;">
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td align="center">
+                                        <p style="margin: 0 0 8px 0; color: #e2e8f0; font-size: 16px; font-weight: 600;">QuantHub Daily</p>
+                                        <p style="margin: 0 0 16px 0; color: #7dd3fc; font-size: 11px; letter-spacing: 1px;">AI-Powered • Risk-Adjusted • Actionable</p>
+                                        
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="background-color: rgba(255,255,255,0.1); border-radius: 6px; margin: 0 auto;">
+                                            <tr>
+                                                <td style="padding: 16px 20px;">
+                                                    <p style="margin: 0; font-size: 11px; color: #cbd5e1; line-height: 1.6; text-align: center; max-width: 500px;">
+                                                        <strong style="color: #fbbf24;">⚠️ IMPORTANT DISCLAIMER</strong><br><br>
+                                                        This newsletter is for <strong>informational and educational purposes only</strong> and does not constitute financial advice, investment advice, trading advice, or any other sort of advice. You should not treat any of the content as such.<br><br>
+                                                        <strong>QuantHub does not recommend</strong> that any securities, portfolios, transactions, or investment strategies are suitable for any specific person. The information provided is based on automated analysis and AI-generated insights, which may contain errors or inaccuracies.<br><br>
+                                                        <strong>Always do your own research</strong> and consult with a qualified financial advisor before making any investment decisions. Past performance is not indicative of future results. Trading stocks involves substantial risk of loss and is not suitable for every investor.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <p style="margin: 20px 0 0 0; font-size: 10px; color: #64748b;">
+                                            © {{ year }} QuantHub.ai | <a href="https://quanthub.ai" style="color: #7dd3fc; text-decoration: none;">quanthub.ai</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>
+

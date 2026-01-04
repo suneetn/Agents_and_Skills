@@ -208,3 +208,4 @@ Cursor has introduced significant updates across multiple versions, with major r
 - Browser integration suggests emphasis on full-stack web development workflows
 
 
+

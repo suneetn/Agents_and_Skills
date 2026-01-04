@@ -265,3 +265,4 @@ cursor-agent -p --output-format json "Your prompt"
 ```
 
 
+

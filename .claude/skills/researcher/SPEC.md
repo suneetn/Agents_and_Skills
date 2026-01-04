@@ -59,20 +59,35 @@ Enable Claude to conduct thorough, multi-source research by:
 
 ### 3. Web Research
 
-**Capability:** Search the web and extract relevant information
+**Capability:** Search the web and extract relevant information using a two-phase approach
 
-**Process:**
-1. Perform targeted web searches
-2. Evaluate source credibility
-3. Extract key information from search results
-4. Cross-reference information across sources
-5. Identify authoritative sources
+**Phase 1: Discovery (web_search tool)**
+- **Process:**
+  1. Perform targeted web searches using `web_search`
+  2. Analyze search result snippets and summaries
+  3. Evaluate source credibility based on URLs and snippets
+  4. Identify most promising sources for deep dive
+  5. Prioritize sources by relevance and credibility
+
+**Phase 2: Deep Dive (Browser tools)**
+- **Process:**
+  1. Use `browser_navigate` to visit most promising sources identified in Phase 1
+  2. Use `browser_snapshot` to read full article content
+  3. Extract comprehensive information from full articles
+  4. Capture detailed data, statistics, and nuanced perspectives
+  5. Verify claims from original sources
+  6. Extract information not available in search snippets
+
+**Why Both Phases Are Important:**
+- **web_search:** Fast discovery, identifies promising sources, provides overview
+- **Browser tools:** Deep understanding, full context, detailed information, verification
 
 **Output:**
-- Summarized information from web sources
-- Source citations
+- Summarized information from web sources (snippets + full articles)
+- Source citations (URLs from search results)
 - Credibility assessment
 - Key facts and statistics
+- Detailed insights from full article reading
 
 ### 4. Information Synthesis
 
@@ -172,13 +187,35 @@ Enable Claude to conduct thorough, multi-source research by:
   3. Receives transcripts and metadata
   4. Synthesizes with other sources
 
-### Web Search
-- **Integration:** Use web_search tool for general web research
+### Web Search (Phase 1: Discovery)
+- **Integration:** Use web_search tool for initial research and source discovery
+- **Purpose:**
+  - Fast and efficient source discovery
+  - Provides summaries from multiple sources
+  - Identifies most promising sources for deep dive
+  - Returns URLs for citation
 - **Workflow:**
   1. Researcher skill performs web searches
-  2. Analyzes search results
-  3. Extracts relevant information
-  4. Cross-references with video sources
+  2. Analyzes search results and snippets
+  3. Evaluates source credibility and relevance
+  4. Identifies top 3-5 most promising sources
+  5. Prioritizes sources for deep reading
+
+### Browser Tools (Phase 2: Deep Dive)
+- **Integration:** Use browser tools to read full articles from promising sources
+- **Purpose:**
+  - Read complete article content (not just snippets)
+  - Extract detailed information and nuanced perspectives
+  - Verify information from original source
+  - Capture data, statistics, and specific details
+  - Access full context and background information
+- **Workflow:**
+  1. Navigate to most promising sources identified in Phase 1
+  2. Read full article content using browser_snapshot
+  3. Extract comprehensive information
+  4. Verify claims and cross-reference details
+  5. Capture information not available in snippets
+- **Note:** Essential for comprehensive, deep research - not optional for thorough research
 
 ### Future Skills
 - **Wikipedia Skill:** For encyclopedic information
@@ -200,9 +237,10 @@ Enable Claude to conduct thorough, multi-source research by:
    - Plan search strategy
 
 3. **Information Gathering**
-   - Execute searches across sources
-   - Extract relevant content
-   - Collect metadata
+   - **Phase 1:** Execute searches across sources (web_search)
+   - **Phase 2:** Read full articles from promising sources (browser tools)
+   - Extract relevant content from both snippets and full articles
+   - Collect metadata and source information
 
 4. **Analysis**
    - Identify key insights
@@ -282,16 +320,31 @@ Enable Claude to conduct thorough, multi-source research by:
 
 ### Dependencies
 - YouTube skill (required)
-- Web search capability (required)
+- Web search capability (required) - Phase 1: Discovery
+- Browser tools (required) - Phase 2: Deep dive for comprehensive research
 - File writing capability (for documents)
-- Browser tools (for web research)
 
 ### Tools Used
-- `youtube` skill functions
-- `web_search` tool
-- `browser_navigate`, `browser_snapshot` (for web research)
+- `youtube` skill functions (uses browser tools internally)
+- `web_search` tool (Phase 1: Source discovery and initial information gathering)
+- `browser_navigate`, `browser_snapshot` (Phase 2: Deep reading of promising sources)
 - `write` tool (for document creation)
 - `codebase_search` (for finding relevant code/info when applicable)
+
+### Two-Phase Research Strategy
+1. **Phase 1: Discovery (web_search)**
+   - Fast source discovery
+   - Analyze snippets and summaries
+   - Identify 3-5 most promising sources
+   - Evaluate credibility and relevance
+
+2. **Phase 2: Deep Dive (Browser tools)**
+   - Read full articles from promising sources
+   - Extract comprehensive information
+   - Verify claims and details
+   - Capture nuanced perspectives
+
+3. **YouTube skill** - Uses browser tools internally (handled by YouTube skill)
 
 ### Data Storage
 - Research documents saved to specified location
@@ -321,13 +374,15 @@ Enable Claude to conduct thorough, multi-source research by:
 
 ### Scenario 3: "Research topic X"
 **Process:**
-1. Find educational videos
-2. Search for articles and documentation
-3. Extract key concepts
-4. Organize by subtopics
-5. Create research document
+1. Find educational videos (YouTube skill)
+2. Search for articles (web_search - Phase 1)
+3. Identify most promising articles (evaluate snippets)
+4. Read full articles from top sources (browser tools - Phase 2)
+5. Extract key concepts from videos and articles
+6. Organize by subtopics
+7. Create research document
 
-**Output:** Comprehensive research document
+**Output:** Comprehensive research document with deep insights
 
 ## Success Metrics
 
@@ -369,9 +424,14 @@ A successful Researcher skill should:
 
 ### Integration Points
 - Calls YouTube skill functions
-- Uses web_search tool
-- Leverages browser tools when needed
+- Uses web_search tool (Phase 1: Discovery)
+- Uses browser tools (Phase 2: Deep dive on promising sources)
 - Creates documents using write tool
+
+### Research Depth Levels
+1. **Quick Research:** web_search only (snippets and summaries)
+2. **Standard Research:** web_search + read 2-3 most promising articles
+3. **Deep Research:** web_search + read 5+ promising articles + YouTube videos + cross-reference
 
 ---
 
@@ -387,6 +447,4 @@ A successful Researcher skill should:
 
 *Specification Version: 1.0*  
 *Last Updated: December 28, 2025*
-
-
 

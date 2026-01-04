@@ -36,3 +36,4 @@ echo "  2. Commit encrypted file: git add $ENCRYPTED_FILE && git commit -m 'Add 
 echo "  3. Push: git push"
 
 
+
