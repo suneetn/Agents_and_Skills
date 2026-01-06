@@ -1,0 +1,120 @@
+{
+    "title": "Daily Momentum Picks",
+    "date": "January 6, 2026",
+    "edition": 1,
+    "screen_type": "momentum",
+    "stocks": [
+        {
+            "rank": 1,
+            "ticker": "PLTR",
+            "name": "Palantir Technologies",
+            "price": 75.42,
+            "change_percent": 3.2,
+            "score": 92,
+            "fmp_rating": {
+                "grade": "A",
+                "recommendation": "Strong Buy"
+            },
+            "growth": {
+                "revenue_growth": 28.8,
+                "eps_growth": 114.9
+            },
+            "metrics": {
+                "pe_ratio": 180,
+                "rsi": 62,
+                "price_vs_50sma": 12.5
+            },
+            "thesis": "**PLTR — High Conviction**\n\nAI powerhouse riding the enterprise adoption wave. Up 149% in 2025, with Q3 revenue hitting $1.18B and US commercial sales surging 121% YoY. The company raised full-year guidance to $4.4B, signaling strong pipeline visibility. Government contracts provide stable base while commercial acceleration drives upside.\n\n**Trade:** Enter on pullback to $70-72 (20 SMA zone). Target $90. Stop $65.\n\n**Risk:** Valuation stretched at 180x P/E - any growth deceleration could trigger sharp correction."
+        },
+        {
+            "rank": 2,
+            "ticker": "NVDA",
+            "name": "NVIDIA Corporation",
+            "price": 142.50,
+            "change_percent": 1.8,
+            "score": 90,
+            "fmp_rating": {
+                "grade": "A",
+                "recommendation": "Strong Buy"
+            },
+            "growth": {
+                "revenue_growth": 94.2,
+                "eps_growth": 168.0
+            },
+            "metrics": {
+                "pe_ratio": 52,
+                "rsi": 58,
+                "price_vs_50sma": 8.3
+            },
+            "thesis": "**NVDA — High Conviction**\n\nThe undisputed AI infrastructure king. Barclays calls it a top large-cap pick for 2026, noting 'AI is still the place to be.' Data center demand remains insatiable with cloud hyperscalers racing to build out capacity. Blackwell architecture ramp provides multi-quarter tailwind.\n\n**Trade:** Accumulate on any dip to $135-138 support. Target $165. Stop $128.\n\n**Risk:** China export restrictions and hyperscaler capex moderation could pressure growth rates."
+        },
+        {
+            "rank": 3,
+            "ticker": "LRCX",
+            "name": "Lam Research",
+            "price": 78.50,
+            "change_percent": 2.4,
+            "score": 88,
+            "fmp_rating": {
+                "grade": "A-",
+                "recommendation": "Buy"
+            },
+            "growth": {
+                "revenue_growth": 22.5,
+                "eps_growth": 45.8
+            },
+            "metrics": {
+                "pe_ratio": 24,
+                "rsi": 55,
+                "price_vs_50sma": 6.2
+            },
+            "thesis": "**LRCX — Medium-High Conviction**\n\nSemiconductor equipment leader up 68% since August. With SMH up 49% in 2025, the semi cycle remains strong. Critical supplier for advanced chip manufacturing, benefiting from AI-driven capacity expansion. More reasonable valuation than pure-play AI names.\n\n**Trade:** Entry zone $75-78. Target $92. Stop $70.\n\n**Risk:** Semi cycles are notoriously volatile - inventory corrections could emerge in H2."
+        },
+        {
+            "rank": 4,
+            "ticker": "MU",
+            "name": "Micron Technology",
+            "price": 102.30,
+            "change_percent": 4.1,
+            "score": 86,
+            "fmp_rating": {
+                "grade": "A-",
+                "recommendation": "Buy"
+            },
+            "growth": {
+                "revenue_growth": 84.3,
+                "eps_growth": 993.0
+            },
+            "metrics": {
+                "pe_ratio": 28,
+                "rsi": 64,
+                "price_vs_50sma": 14.8
+            },
+            "thesis": "**MU — Medium Conviction**\n\nMemory chip leader riding the AI infrastructure wave. Q1 FY2026 beat expectations with strong HBM (high-bandwidth memory) guidance. Datacenter demand for AI accelerating. The 993% EPS growth reflects the cycle turning favorable after deep trough.\n\n**Trade:** Entry on pullback to $95-98. Target $120. Stop $88.\n\n**Risk:** Memory pricing cycles brutal - any demand softening could trigger 20-30% correction."
+        },
+        {
+            "rank": 5,
+            "ticker": "AMZN",
+            "name": "Amazon.com Inc",
+            "price": 228.40,
+            "change_percent": 1.2,
+            "score": 85,
+            "fmp_rating": {
+                "grade": "A",
+                "recommendation": "Strong Buy"
+            },
+            "growth": {
+                "revenue_growth": 12.8,
+                "eps_growth": 52.4
+            },
+            "metrics": {
+                "pe_ratio": 45,
+                "rsi": 56,
+                "price_vs_50sma": 5.8
+            },
+            "thesis": "**AMZN — High Conviction**\n\nRBC Capital's favorite idea for 2026, citing 'best-in-class visibility on AI infrastructure ROIC with compelling product cycle.' AWS remains the profit engine, while retail margins expand. Bedrock AI platform gaining enterprise traction.\n\n**Trade:** Accumulate at current levels or on dips to $220. Target $260. Stop $205.\n\n**Risk:** Antitrust headwinds and e-commerce competition from Temu/Shein."
+        }
+    ],
+    "market_summary": "Markets continue their upward trajectory into 2026, driven by AI infrastructure buildout and strong corporate earnings. The semiconductor sector (SMH +49% in 2025) leads the charge, with chip equipment makers and memory suppliers benefiting from insatiable datacenter demand. Barclays analysts note 'AI is still the place to be' and expect a 'choppy but cheerful year for chips.' Key risks include stretched valuations in AI names and potential Fed rate path uncertainty.",
+    "footer_text": "This newsletter is for informational purposes only and does not constitute investment advice. Always do your own research before making investment decisions."
+}

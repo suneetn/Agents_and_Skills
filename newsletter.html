@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Momentum Picks</title>
+    <style>
+        /* Reset */
+        body, table, td, p, a, li, blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        /* Base Styles */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f4f4f4;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .header .subtitle {
+            color: #a0aec0;
+            margin: 8px 0 0 0;
+            font-size: 14px;
+        }
+        .header .date {
+            color: #4fd1c5;
+            margin: 5px 0 0 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Content */
+        .content {
+            padding: 30px 20px;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a202c;
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4fd1c5;
+        }
+        
+        /* Stock Table */
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .stock-table th {
+            background-color: #2d3748;
+            color: #ffffff;
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stock-table td {
+            padding: 15px 8px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            color: #2d3748;
+        }
+        .stock-table tr:hover {
+            background-color: #f7fafc;
+        }
+        
+        /* Stock Row */
+        .stock-rank {
+            font-weight: 700;
+            color: #4fd1c5;
+            font-size: 16px;
+        }
+        .stock-ticker {
+            font-weight: 700;
+            color: #1a202c;
+            font-size: 15px;
+        }
+        .stock-name {
+            color: #718096;
+            font-size: 12px;
+            display: block;
+            margin-top: 2px;
+        }
+        .stock-price {
+            font-weight: 600;
+        }
+        .stock-change-positive {
+            color: #38a169;
+            font-weight: 600;
+        }
+        .stock-change-negative {
+            color: #e53e3e;
+            font-weight: 600;
+        }
+        
+        /* Rating Badges */
+        .rating-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .rating-strong-buy {
+            background-color: #c6f6d5;
+            color: #22543d;
+        }
+        .rating-buy {
+            background-color: #c6f6d5;
+            color: #276749;
+        }
+        .rating-neutral {
+            background-color: #fefcbf;
+            color: #744210;
+        }
+        .rating-sell {
+            background-color: #fed7d7;
+            color: #c53030;
+        }
+        
+        /* Score Bar */
+        .score-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4fd1c5, #38b2ac);
+            border-radius: 3px;
+        }
+        
+        /* Growth Metrics */
+        .growth-metric {
+            font-size: 11px;
+            color: #718096;
+        }
+        .growth-positive {
+            color: #38a169;
+        }
+        .growth-negative {
+            color: #e53e3e;
+        }
+        
+        /* Sparkline */
+        .sparkline {
+            width: 60px;
+            height: 20px;
+        }
+        
+        /* Market Summary */
+        .market-summary {
+            background-color: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .market-summary p {
+            margin: 0;
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #2d3748;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .footer p {
+            color: #a0aec0;
+            font-size: 12px;
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        .footer .disclaimer {
+            color: #718096;
+            font-size: 10px;
+            margin-top: 15px;
+        }
+        
+        /* Mobile Responsive */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+            .header h1 {
+                font-size: 24px !important;
+            }
+            .stock-table th, .stock-table td {
+                padding: 10px 5px !important;
+                font-size: 12px !important;
+            }
+            .content {
+                padding: 20px 15px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f4f4;">
+            <tr>
+                <td>
+                    <div class="email-container">
+<!-- Header -->
+<div class="header">
+    <h1>Daily Momentum Picks</h1>
+    <p class="subtitle">Top picks based on momentum &amp; growth analysis</p>
+    <p class="date">January 6, 2026 • Edition #1</p>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    
+    <!-- Market Summary -->
+    <h2 class="section-header">📊 Market Summary</h2>
+    <div class="market-summary">
+        <p>Markets continue their upward trajectory into 2026, driven by AI infrastructure buildout and strong corporate earnings. The semiconductor sector (SMH +49% in 2025) leads the charge, with chip equipment makers and memory suppliers benefiting from insatiable datacenter demand. Barclays analysts note &#39;AI is still the place to be&#39; and expect a &#39;choppy but cheerful year for chips.&#39; Key risks include stretched valuations in AI names and potential Fed rate path uncertainty.</p>
+    </div>
+    
+    <!-- Stock Picks -->
+    <h2 class="section-header">🎯 Today's Top Picks</h2>
+    
+    <table class="stock-table" role="presentation">
+        <thead>
+            <tr>
+                <th style="width: 8%;">#</th>
+                <th style="width: 25%;">Stock</th>
+                <th style="width: 17%;">Price</th>
+                <th style="width: 15%;">Rating</th>
+                <th style="width: 20%;">Growth</th>
+                <th style="width: 15%;">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <span class="stock-rank">1</span>
+                </td>
+                <td>
+                    <span class="stock-ticker">PLTR</span>
+                    <span class="stock-name">Palantir Technologies</span>
+                </td>
+                <td>
+                    <span class="stock-price">$75.42</span>
+                    <br>
+                    <span class="stock-change-positive">+3.2%</span>
+                </td>
+                <td>
+                    <span class="rating-badge rating-strong-buy">
+                        A
+                    </span>
+                    <br>
+                    <span style="font-size: 10px; color: #718096;">Strong Buy</span>
+                </td>
+                <td>
+                    <span class="growth-metric">
+                        Rev: 
+                        <span class="growth-positive">+29%</span>
+                    </span>
+                    <br>
+                    <span class="growth-metric">
+                        EPS: 
+                        <span class="growth-positive">+115%</span>
+                    </span>
+                </td>
+                <td>
+                    <span style="font-weight: 600; font-size: 14px;">92</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 92%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="stock-rank">2</span>
+                </td>
+                <td>
+                    <span class="stock-ticker">NVDA</span>
+                    <span class="stock-name">NVIDIA Corporation</span>
+                </td>
+                <td>
+                    <span class="stock-price">$142.50</span>
+                    <br>
+                    <span class="stock-change-positive">+1.8%</span>
+                </td>
+                <td>
+                    <span class="rating-badge rating-strong-buy">
+                        A
+                    </span>
+                    <br>
+                    <span style="font-size: 10px; color: #718096;">Strong Buy</span>
+                </td>
+                <td>
+                    <span class="growth-metric">
+                        Rev: 
+                        <span class="growth-positive">+94%</span>
+                    </span>
+                    <br>
+                    <span class="growth-metric">
+                        EPS: 
+                        <span class="growth-positive">+168%</span>
+                    </span>
+                </td>
+                <td>
+                    <span style="font-weight: 600; font-size: 14px;">90</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 90%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="stock-rank">3</span>
+                </td>
+                <td>
+                    <span class="stock-ticker">LRCX</span>
+                    <span class="stock-name">Lam Research</span>
+                </td>
+                <td>
+                    <span class="stock-price">$78.50</span>
+                    <br>
+                    <span class="stock-change-positive">+2.4%</span>
+                </td>
+                <td>
+                    <span class="rating-badge rating-buy">
+                        A-
+                    </span>
+                    <br>
+                    <span style="font-size: 10px; color: #718096;">Buy</span>
+                </td>
+                <td>
+                    <span class="growth-metric">
+                        Rev: 
+                        <span class="growth-positive">+22%</span>
+                    </span>
+                    <br>
+                    <span class="growth-metric">
+                        EPS: 
+                        <span class="growth-positive">+46%</span>
+                    </span>
+                </td>
+                <td>
+                    <span style="font-weight: 600; font-size: 14px;">88</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 88%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="stock-rank">4</span>
+                </td>
+                <td>
+                    <span class="stock-ticker">MU</span>
+                    <span class="stock-name">Micron Technology</span>
+                </td>
+                <td>
+                    <span class="stock-price">$102.30</span>
+                    <br>
+                    <span class="stock-change-positive">+4.1%</span>
+                </td>
+                <td>
+                    <span class="rating-badge rating-buy">
+                        A-
+                    </span>
+                    <br>
+                    <span style="font-size: 10px; color: #718096;">Buy</span>
+                </td>
+                <td>
+                    <span class="growth-metric">
+                        Rev: 
+                        <span class="growth-positive">+84%</span>
+                    </span>
+                    <br>
+                    <span class="growth-metric">
+                        EPS: 
+                        <span class="growth-positive">+993%</span>
+                    </span>
+                </td>
+                <td>
+                    <span style="font-weight: 600; font-size: 14px;">86</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 86%;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="stock-rank">5</span>
+                </td>
+                <td>
+                    <span class="stock-ticker">AMZN</span>
+                    <span class="stock-name">Amazon.com Inc</span>
+                </td>
+                <td>
+                    <span class="stock-price">$228.40</span>
+                    <br>
+                    <span class="stock-change-positive">+1.2%</span>
+                </td>
+                <td>
+                    <span class="rating-badge rating-strong-buy">
+                        A
+                    </span>
+                    <br>
+                    <span style="font-size: 10px; color: #718096;">Strong Buy</span>
+                </td>
+                <td>
+                    <span class="growth-metric">
+                        Rev: 
+                        <span class="growth-positive">+13%</span>
+                    </span>
+                    <br>
+                    <span class="growth-metric">
+                        EPS: 
+                        <span class="growth-positive">+52%</span>
+                    </span>
+                </td>
+                <td>
+                    <span style="font-weight: 600; font-size: 14px;">85</span>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 85%;"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Detailed Analysis -->
+    <h2 class="section-header">📈 Quick Analysis</h2>
+    <div style="margin-bottom: 20px; padding: 15px; background-color: #f7fafc; border-radius: 8px; border-left: 4px solid #4fd1c5;">
+        <h3 style="margin: 0 0 8px 0; color: #1a202c; font-size: 16px;">
+            #1 PLTR - Palantir Technologies
+        </h3>
+        <p style="margin: 0; color: #4a5568; font-size: 13px; line-height: 1.5;">
+            • P/E: 180.0
+            • vs 50 SMA: +12.5%
+        </p>
+    </div>
+    <div style="margin-bottom: 20px; padding: 15px; background-color: #f7fafc; border-radius: 8px; border-left: 4px solid #4fd1c5;">
+        <h3 style="margin: 0 0 8px 0; color: #1a202c; font-size: 16px;">
+            #2 NVDA - NVIDIA Corporation
+        </h3>
+        <p style="margin: 0; color: #4a5568; font-size: 13px; line-height: 1.5;">
+            • P/E: 52.0
+            • vs 50 SMA: +8.3%
+        </p>
+    </div>
+    <div style="margin-bottom: 20px; padding: 15px; background-color: #f7fafc; border-radius: 8px; border-left: 4px solid #4fd1c5;">
+        <h3 style="margin: 0 0 8px 0; color: #1a202c; font-size: 16px;">
+            #3 LRCX - Lam Research
+        </h3>
+        <p style="margin: 0; color: #4a5568; font-size: 13px; line-height: 1.5;">
+            • P/E: 24.0
+            • vs 50 SMA: +6.2%
+        </p>
+    </div>
+    
+    <!-- Call to Action -->
+    <div style="text-align: center; margin: 30px 0;">
+        <p style="color: #718096; font-size: 13px; margin: 0;">
+            Screen: <strong>Momentum</strong> 
+            • Stocks Analyzed: <strong>500+</strong>
+            • Generated: <strong>2026-01-06 18:35</strong>
+        </p>
+    </div>
+    
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p><strong>QuantHub Daily</strong></p>
+    <p>Powered by AI-driven stock analysis</p>
+    <p class="disclaimer">
+        This newsletter is for informational purposes only and does not constitute investment advice. Always do your own research before making investment decisions.
+    </p>
+</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>
+
+
